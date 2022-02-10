@@ -1,0 +1,60 @@
+#pragma once
+
+
+#cmakedefine DV_HAVE_UNISTD_H 1
+#cmakedefine DV_HAVE_INTTYPES_H 1
+#cmakedefine DV_HAVE_LIMITS_H 1
+
+#cmakedefine DV_SYS_LINUX 1
+#cmakedefine DV_SYS_WINDOWS 1
+#cmakedefine DV_SYS_MACOS 1
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <assert.h>
+#include <errno.h>
+#include <math.h>
+
+#ifdef DV_HAVE_UNISTD_H
+#include <unistd.h>
+#endif
+
+#ifdef DV_HAVE_INTTYPES_H
+#include <inttypes.h>
+#endif
+
+#ifdef DV_HAVE_LIMITS_H
+#include <limits.h>
+#endif
+
+#define DV_MALLOC malloc
+#define DV_FREE free
+
+#include <memory>
+#include <string>
+#include <vector>
+#include <list>
+#include <set>
+#include <map>
+#include <unordered_map>
+#include <functional>
+#include <algorithm>
+
+#if defined (__LP64__) || defined (__64BIT__) || defined (_LP64) || (__WORDSIZE == 64) || defined(_WIN64)
+	#define DV_64BIT 1
+#endif
+
+#ifndef MAX_PATH
+	#define MAX_PATH	(260)
+#endif
+
+#ifdef DV_SYS_WINDOWS
+    #define snprintf _snprintf 
+    #ifdef  _WIN64
+        typedef signed __int64    ssize_t;
+    #else
+        typedef _W64 signed int   ssize_t;
+    #endif
+#endif
+
