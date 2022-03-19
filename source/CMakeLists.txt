@@ -44,6 +44,22 @@ set(DV_ASSET_SOURCE_FILES
 source_group("asset" FILES ${DV_ASSET_SOURCE_FILES})
 
 ########
+# davinci scene source files
+########
+set(DV_SCENE_SOURCE_FILES
+	scene/dv_scene.h
+	scene/dv_scene.cpp
+	scene/dv_scene_object.h
+	scene/dv_scene_object.cpp
+	scene/dv_camera.h
+	scene/dv_camera.cpp
+	scene/dv_entity.h
+	scene/dv_entity.cpp
+)
+source_group("scene" FILES ${DV_SCENE_SOURCE_FILES})
+
+
+########
 # source files
 ########
 set(DV_INCLUDE_FILES
@@ -62,10 +78,6 @@ set(DV_INCLUDE_FILES
 	dv_vertex_desc.h
 	dv_index_buffer.h 
 	dv_vertex_buffer.h
-	dv_camera.h
-	dv_entity.h
-	dv_scene.h
-	dv_scene_object.h
 )
 
 set(DV_SOURCE_FILES 
@@ -83,10 +95,6 @@ set(DV_SOURCE_FILES
 	dv_vertex_desc.cpp
 	dv_index_buffer.cpp
 	dv_vertex_buffer.cpp
-	dv_camera.cpp
-	dv_entity.cpp
-	dv_scene.cpp
-	dv_scene_object.cpp
 )
 
 ########
@@ -120,6 +128,7 @@ add_library(davinci
 	${DV_PRECOMPILED_SOURCE_FILE}
 	${DV_MATH_SOURCE_FILES}
 	${DV_ASSET_SOURCE_FILES}
+	${DV_SCENE_SOURCE_FILES}
 	${DV_SOURCE_FILES}
 	${DV_INCLUDE_FILES}
 )

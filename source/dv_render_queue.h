@@ -3,7 +3,7 @@
 #include "dv_prerequisites.h"
 
 //to be remove
-#include "dv_camera.h"
+#include "scene/dv_camera.h"
 
 namespace davinci
 {
