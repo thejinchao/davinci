@@ -58,6 +58,26 @@ set(DV_SCENE_SOURCE_FILES
 )
 source_group("scene" FILES ${DV_SCENE_SOURCE_FILES})
 
+########
+# davinci device source files
+########
+set(DV_DEVICE_SOURCE_FILES
+	device/dv_render_device.h
+	device/dv_render_device.cpp
+	device/dv_device_buffer.h
+	device/dv_device_buffer.cpp
+	device/dv_vertex_buffer.h
+	device/dv_vertex_buffer.cpp
+	device/dv_vertex_desc.h
+	device/dv_vertex_desc.cpp
+	device/dv_index_buffer.h
+	device/dv_index_buffer.cpp
+	device/dv_constant_buffer.h
+	device/dv_constant_buffer.cpp
+	device/dv_render_target.h
+	device/dv_render_target.cpp
+)
+source_group("device" FILES ${DV_DEVICE_SOURCE_FILES})
 
 ########
 # source files
@@ -65,36 +85,20 @@ source_group("scene" FILES ${DV_SCENE_SOURCE_FILES})
 set(DV_INCLUDE_FILES
 	dv_prerequisites.h
 	dv_common.h
-	dv_constant_buffer.h
-	dv_device_buffer.h  
 	dv_pipe_IA.h
 	dv_pipe_PS.h
 	dv_pipe_VS.h
-	dv_pixel_buffer.h   
 	dv_rasterizer.h	 
-	dv_render_device.h  
 	dv_render_queue.h   
-	dv_render_target.h
-	dv_vertex_desc.h
-	dv_index_buffer.h 
-	dv_vertex_buffer.h
 )
 
 set(DV_SOURCE_FILES 
-	dv_constant_buffer.cpp
-	dv_device_buffer.cpp
 	dv_pipe_IA.cpp
 	dv_pipe_PS.cpp
 	dv_pipe_VS.cpp
-	dv_pixel_buffer.cpp
 	dv_rasterizer.cpp
 	dv_rasterizer_larrabee.cpp
-	dv_render_device.cpp
 	dv_render_queue.cpp
-	dv_render_target.cpp
-	dv_vertex_desc.cpp
-	dv_index_buffer.cpp
-	dv_vertex_buffer.cpp
 )
 
 ########
@@ -129,6 +133,7 @@ add_library(davinci
 	${DV_MATH_SOURCE_FILES}
 	${DV_ASSET_SOURCE_FILES}
 	${DV_SCENE_SOURCE_FILES}
+	${DV_DEVICE_SOURCE_FILES}
 	${DV_SOURCE_FILES}
 	${DV_INCLUDE_FILES}
 )

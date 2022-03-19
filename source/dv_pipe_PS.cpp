@@ -1,10 +1,10 @@
 #include "dv_precompiled.h"
 #include "dv_pipe_PS.h"
 
-#include "dv_render_target.h"
+#include "device/dv_render_target.h"
 #include "dv_pipe_VS.h"
 #include "dv_rasterizer.h"
-#include "dv_device_buffer.h"
+#include "device/dv_device_buffer.h"
 
 namespace davinci
 {

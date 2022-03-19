@@ -1,9 +1,9 @@
 #include "dv_precompiled.h"
 #include "dv_asset_utility.h"
 
-#include "dv_vertex_desc.h"
-#include "dv_vertex_buffer.h"
-#include "dv_index_buffer.h"
+#include "device/dv_vertex_desc.h"
+#include "device/dv_vertex_buffer.h"
+#include "device/dv_index_buffer.h"
 #include "dv_model.h"
 #include "dv_texture.h"
 

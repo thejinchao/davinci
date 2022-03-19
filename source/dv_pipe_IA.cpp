@@ -2,10 +2,10 @@
 #include "dv_pipe_IA.h"
 
 #include "dv_render_queue.h"
-#include "dv_vertex_buffer.h"
-#include "dv_index_buffer.h"
-#include "dv_render_device.h"
-#include "dv_device_buffer.h"
+#include "device/dv_vertex_buffer.h"
+#include "device/dv_index_buffer.h"
+#include "device/dv_render_device.h"
+#include "device/dv_device_buffer.h"
 
 namespace davinci
 {

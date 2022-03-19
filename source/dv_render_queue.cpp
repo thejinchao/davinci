@@ -1,7 +1,7 @@
 #include "dv_precompiled.h"
 #include "dv_render_queue.h"
 
-#include "dv_constant_buffer.h"
+#include "device/dv_constant_buffer.h"
 
 namespace davinci
 {

@@ -3,8 +3,8 @@
 #include "dv_prerequisites.h"
 
 //to be remove
-#include "dv_constant_buffer.h"
-#include "dv_vertex_desc.h"
+#include "device/dv_constant_buffer.h"
+#include "device/dv_vertex_desc.h"
 
 namespace davinci
 {

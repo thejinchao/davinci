@@ -2,8 +2,8 @@
 #include "dv_pipe_VS.h"
 
 #include "dv_pipe_IA.h"
-#include "dv_render_device.h"
-#include "dv_device_buffer.h"
+#include "device/dv_render_device.h"
+#include "device/dv_device_buffer.h"
 
 namespace davinci
 {
