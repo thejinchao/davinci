@@ -6,7 +6,7 @@
 #include "dv_render_queue.h"
 
 //to be remove
-#include "dv_model.h"
+#include "asset/dv_model.h"
 
 namespace davinci
 {

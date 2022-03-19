@@ -28,8 +28,20 @@ set(DV_MATH_SOURCE_FILES
 	math/dv_math_util.h
 	math/dv_math_util.cpp
 )
-
 source_group("math" FILES ${DV_MATH_SOURCE_FILES})
+
+########
+# davinci asset source files
+########
+set(DV_ASSET_SOURCE_FILES
+	asset/dv_model.h
+	asset/dv_model.cpp
+	asset/dv_texture.h
+	asset/dv_texture.cpp
+	asset/dv_asset_utility.h
+	asset/dv_asset_utility.cpp
+)
+source_group("asset" FILES ${DV_ASSET_SOURCE_FILES})
 
 ########
 # source files
@@ -48,10 +60,7 @@ set(DV_INCLUDE_FILES
 	dv_render_queue.h   
 	dv_render_target.h
 	dv_vertex_desc.h
-	dv_asset_utility.h
 	dv_index_buffer.h 
-	dv_model.h
-	dv_texture.h
 	dv_vertex_buffer.h
 	dv_camera.h
 	dv_entity.h
@@ -72,10 +81,7 @@ set(DV_SOURCE_FILES
 	dv_render_queue.cpp
 	dv_render_target.cpp
 	dv_vertex_desc.cpp
-	dv_asset_utility.cpp
 	dv_index_buffer.cpp
-	dv_model.cpp
-	dv_texture.cpp
 	dv_vertex_buffer.cpp
 	dv_camera.cpp
 	dv_entity.cpp
@@ -113,6 +119,7 @@ add_library(davinci
 	${DV_PRECOMPILED_INCLUDE_FILE}
 	${DV_PRECOMPILED_SOURCE_FILE}
 	${DV_MATH_SOURCE_FILES}
+	${DV_ASSET_SOURCE_FILES}
 	${DV_SOURCE_FILES}
 	${DV_INCLUDE_FILES}
 )
