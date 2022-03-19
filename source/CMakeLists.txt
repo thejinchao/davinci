@@ -10,7 +10,6 @@ set(DV_PRECOMPILED_SOURCE_FILE
 	dv_precompiled.cpp
 )
 
-
 ########
 # davinci math source files
 ########
@@ -106,6 +105,7 @@ source_group("pipe" FILES ${DV_PIPELINE_SOURCE_FILES})
 set(DV_INCLUDE_FILES
 	dv_prerequisites.h
 	dv_common.h
+	davinci.h
 )
 
 ########
@@ -137,10 +137,12 @@ endif()
 add_library(davinci 
 	${DV_PRECOMPILED_INCLUDE_FILE}
 	${DV_PRECOMPILED_SOURCE_FILE}
+	${DV_AUTO_CONFIG_FILE}
+	${DV_INCLUDE_FILES}
+
 	${DV_MATH_SOURCE_FILES}
 	${DV_ASSET_SOURCE_FILES}
 	${DV_SCENE_SOURCE_FILES}
 	${DV_DEVICE_SOURCE_FILES}
 	${DV_PIPELINE_SOURCE_FILES}
-	${DV_INCLUDE_FILES}
 )
