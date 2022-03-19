@@ -35,7 +35,7 @@ void Sample03::init(void)
 	Entity* entity = new Entity();
 	entity->build(Matrix4::IDENTITY,
 		//AssetUtility::createStandardModel_Sphere(&m_device, 100.f, PrimitiveType::PT_TRIANGLE_LIST),
-		AssetUtility::loadModel(&m_device, "sm_matpreviewmesh_02.dam"),
+		AssetUtility::loadModel(&m_device, "mesh/sm_matpreviewmesh_02.dam"),
 		m_vs, m_ps);
 
 	m_model = std::shared_ptr<SceneObject>((SceneObject*)entity);
