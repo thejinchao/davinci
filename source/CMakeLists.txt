@@ -91,8 +91,8 @@ set(DV_PIPELINE_SOURCE_FILES
 	pipe/dv_pipe_VS.h
 	pipe/dv_pipe_VS.cpp
 	pipe/dv_rasterizer.h
-	pipe/dv_rasterizer.cpp
-	pipe/dv_rasterizer_larrabee.cpp
+	pipe/dv_rasterizer_line.cpp
+	pipe/dv_rasterizer_triangle.cpp
 	pipe/dv_render_queue.h
 	pipe/dv_render_queue.cpp
 )
