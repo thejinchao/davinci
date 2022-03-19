@@ -82,25 +82,30 @@ set(DV_DEVICE_SOURCE_FILES
 source_group("device" FILES ${DV_DEVICE_SOURCE_FILES})
 
 ########
-# source files
+# davinci pipeline source files
+########
+set(DV_PIPELINE_SOURCE_FILES
+	pipe/dv_pipe_IA.h
+	pipe/dv_pipe_IA.cpp
+	pipe/dv_pipe_PS.h
+	pipe/dv_pipe_PS.cpp
+	pipe/dv_pipe_VS.h
+	pipe/dv_pipe_VS.cpp
+	pipe/dv_rasterizer.h
+	pipe/dv_rasterizer.cpp
+	pipe/dv_rasterizer_larrabee.cpp
+	pipe/dv_render_queue.h
+	pipe/dv_render_queue.cpp
+)
+source_group("pipe" FILES ${DV_PIPELINE_SOURCE_FILES})
+
+
+########
+# include files
 ########
 set(DV_INCLUDE_FILES
 	dv_prerequisites.h
 	dv_common.h
-	dv_pipe_IA.h
-	dv_pipe_PS.h
-	dv_pipe_VS.h
-	dv_rasterizer.h	 
-	dv_render_queue.h   
-)
-
-set(DV_SOURCE_FILES 
-	dv_pipe_IA.cpp
-	dv_pipe_PS.cpp
-	dv_pipe_VS.cpp
-	dv_rasterizer.cpp
-	dv_rasterizer_larrabee.cpp
-	dv_render_queue.cpp
 )
 
 ########
@@ -136,6 +141,6 @@ add_library(davinci
 	${DV_ASSET_SOURCE_FILES}
 	${DV_SCENE_SOURCE_FILES}
 	${DV_DEVICE_SOURCE_FILES}
-	${DV_SOURCE_FILES}
+	${DV_PIPELINE_SOURCE_FILES}
 	${DV_INCLUDE_FILES}
 )

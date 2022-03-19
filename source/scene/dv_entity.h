@@ -3,7 +3,7 @@
 #include "dv_prerequisites.h"
 
 #include "dv_scene_object.h"
-#include "dv_render_queue.h"
+#include "pipe/dv_render_queue.h"
 
 //to be remove
 #include "asset/dv_model.h"

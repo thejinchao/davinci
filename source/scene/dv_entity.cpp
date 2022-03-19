@@ -1,8 +1,8 @@
 #include "dv_precompiled.h"
 #include "dv_entity.h"
 
-#include "dv_pipe_vs.h"
-#include "dv_pipe_ps.h"
+#include "pipe/dv_pipe_vs.h"
+#include "pipe/dv_pipe_ps.h"
 
 namespace davinci
 {

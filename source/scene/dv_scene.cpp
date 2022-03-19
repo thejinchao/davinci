@@ -2,7 +2,7 @@
 #include "dv_scene.h"
 
 #include "dv_scene_object.h"
-#include "dv_render_queue.h"
+#include "pipe/dv_render_queue.h"
 
 namespace davinci
 {

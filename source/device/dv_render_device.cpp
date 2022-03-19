@@ -2,10 +2,10 @@
 #include "dv_render_device.h"
 
 #include "dv_device_buffer.h"
-#include "dv_pipe_IA.h"
-#include "dv_pipe_VS.h"
-#include "dv_pipe_PS.h"
-#include "dv_render_queue.h"
+#include "pipe/dv_pipe_IA.h"
+#include "pipe/dv_pipe_VS.h"
+#include "pipe/dv_pipe_PS.h"
+#include "pipe/dv_render_queue.h"
 
 namespace davinci
 {
