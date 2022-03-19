@@ -72,6 +72,8 @@ set(DV_DEVICE_SOURCE_FILES
 	device/dv_vertex_desc.cpp
 	device/dv_index_buffer.h
 	device/dv_index_buffer.cpp
+	device/dv_pixel_buffer.h
+	device/dv_pixel_buffer.cpp
 	device/dv_constant_buffer.h
 	device/dv_constant_buffer.cpp
 	device/dv_render_target.h
