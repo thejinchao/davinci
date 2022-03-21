@@ -5,8 +5,8 @@
 class Sample02 : public SampleBase
 {
 public:
-	void init(void);
-	void render(int32_t width, int32_t height);
+	virtual bool init(void);
+	virtual void render(int32_t width, int32_t height);
 
 private:
 	RenderDevice m_device;

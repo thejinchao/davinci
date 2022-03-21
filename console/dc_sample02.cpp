@@ -13,7 +13,7 @@ typedef VertexShaderStandard<false, true>	VSStandard;
 typedef PixelShaderTexture<VSOUT>			PSWithTexture;
 
 //-------------------------------------------------------------------------------------
-void Sample02::init(void)
+bool Sample02::init(void)
 {
 	//create scene
 	m_scene.init();
@@ -38,6 +38,7 @@ void Sample02::init(void)
 	m_scene.addNode(m_cube);
 
 	m_updateT = 0.f;
+	return true;
 }
 
 //-------------------------------------------------------------------------------------

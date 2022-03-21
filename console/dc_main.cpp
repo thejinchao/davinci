@@ -16,7 +16,7 @@
 int32_t g_screenWidth = 512;
 int32_t g_screenHeight = 256;
 uint32_t g_canvasTexture;
-Sample03 g_dvScene;
+Sample02 g_dvScene;
 
 //-------------------------------------------------------------------------------------
 void processInput(GLFWwindow *window)
@@ -113,7 +113,9 @@ int main(int argc, char* argv[])
 	glEnable(GL_TEXTURE_2D);
 
 	//render scene
-	g_dvScene.init();
+	if (!g_dvScene.init()) {
+		return -1;
+	}
 
 	//update scene(once)
 #ifdef RENDER_ONCE

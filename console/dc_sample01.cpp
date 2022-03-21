@@ -15,7 +15,7 @@ typedef VertexShaderStandard<true, false>			VSStandard;
 typedef PixelShaderStandard<VSOUT, LIGHT_COUNTS>	PSWithDirLight;
 
 //-------------------------------------------------------------------------------------
-void Sample01::init(void)
+bool Sample01::init(void)
 {
 	//create scene
 	m_scene.init();
@@ -60,6 +60,7 @@ void Sample01::init(void)
 	m_scene.addNode(m_light2);
 
 	m_rotateParam = 0.f;
+	return true;
 }
 
 //-------------------------------------------------------------------------------------

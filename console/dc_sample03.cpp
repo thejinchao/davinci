@@ -14,7 +14,7 @@ typedef VertexShaderStandard<true, false>	VSStandard;
 typedef PixelShaderMaterial<VSOUT>			PSMaterial;
 
 //-------------------------------------------------------------------------------------
-void Sample03::init(void)
+bool Sample03::init(void)
 {
 	//create scene
 	m_scene.init();
@@ -32,15 +32,16 @@ void Sample03::init(void)
 	((PSMaterial*)m_ps.get())->setLightColor(Vector3::WHITE);
 
 	//build a scene
+	ModelPtr matPreviewMesh = AssetUtility::loadModel(&m_device, "mesh/sm_matpreviewmesh_02.dam");
+	if (matPreviewMesh == nullptr) return false;
+
 	Entity* entity = new Entity();
-	entity->build(Matrix4::IDENTITY,
-		//AssetUtility::createStandardModel_Sphere(&m_device, 100.f, PrimitiveType::PT_TRIANGLE_LIST),
-		AssetUtility::loadModel(&m_device, "mesh/sm_matpreviewmesh_02.dam"),
-		m_vs, m_ps);
+	entity->build(Matrix4::IDENTITY, matPreviewMesh, m_vs, m_ps);
 
 	m_model = std::shared_ptr<SceneObject>((SceneObject*)entity);
 	m_scene.addNode(m_model);
 
+	return true;
 }
 
 //-------------------------------------------------------------------------------------

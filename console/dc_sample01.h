@@ -4,8 +4,8 @@
 class Sample01 : public SampleBase
 {
 public:
-	void init(void);
-	void render(int32_t width, int32_t height);
+	virtual bool init(void);
+	virtual void render(int32_t width, int32_t height);
 
 	const Camera& getCamera(void) const { return m_camera; }
 	const Vector3& getLightDir(size_t index) const { return m_lightDir[index]; }
