@@ -103,6 +103,6 @@ void Sample01::render(int32_t width, int32_t height)
 
 	//render!
 	m_renderTarget.init(width, height);
-	m_device.process(renderQueue, m_renderTarget);
+	renderQueue.process(m_renderTarget);
 }
 

@@ -96,6 +96,8 @@ set(DV_PIPELINE_SOURCE_FILES
 	pipe/dv_rasterizer_triangle.cpp
 	pipe/dv_render_queue.h
 	pipe/dv_render_queue.cpp
+	pipe/dv_renderable.h
+	pipe/dv_renderable.cpp
 )
 source_group("pipe" FILES ${DV_PIPELINE_SOURCE_FILES})
 

@@ -2,6 +2,7 @@
 #include "dv_pipe_IA.h"
 
 #include "dv_render_queue.h"
+#include "dv_renderable.h"
 #include "device/dv_vertex_buffer.h"
 #include "device/dv_index_buffer.h"
 #include "device/dv_render_device.h"

@@ -4,6 +4,7 @@
 
 #include "dv_scene_object.h"
 #include "pipe/dv_render_queue.h"
+#include "pipe/dv_renderable.h"
 
 //to be remove
 #include "asset/dv_model.h"

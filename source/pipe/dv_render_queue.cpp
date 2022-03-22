@@ -3,20 +3,12 @@
 
 #include "device/dv_constant_buffer.h"
 
+#include "dv_pipe_IA.h"
+#include "dv_pipe_VS.h"
+#include "dv_pipe_PS.h"
+
 namespace davinci
 {
-
-//-------------------------------------------------------------------------------------
-void Renderable::setVSConstantBuffer(int32_t index, const uint8_t* buffer, size_t length)
-{
-	m_vsConstantBuffer->setBuffer(index, buffer, length);
-}
-
-//-------------------------------------------------------------------------------------
-void Renderable::setPSConstantBuffer(int32_t index, const uint8_t* buffer, size_t length)
-{
-	m_psConstantBuffer->setBuffer(index, buffer, length);
-}
 
 //-------------------------------------------------------------------------------------
 void RenderQueue::clear(void)
@@ -42,6 +34,34 @@ void RenderQueue::visitorRenderable(std::function<void(ConstRenderablePtr render
 	for (ConstRenderablePtr renderable : m_queue) {
 		visitorFunc(renderable);
 	}
+}
+
+//-------------------------------------------------------------------------------------
+void RenderQueue::process(RenderTarget& renderTarget)
+{
+	//0 : Input Assember
+	/*
+		Renderable Queue -> IA  -> PrimitiveAfterAssember
+	*/
+	PrimitiveAfterAssember inputPrimitive;
+	InputAssember::process(*this, inputPrimitive);
+
+
+
+	//1 : Vertex Shader
+	/*
+		PrimitiveAfterAssember -> VS -> PrimitiveAfterVS
+	*/
+	PrimitiveAfterVS primitiveAfterVS;
+	VertexShader::process(getDevice(), inputPrimitive, primitiveAfterVS);
+
+
+
+	//2: Pixel Shader
+	/*
+		PrimitiveAfterVS -> PS -> Render Target Texture
+	*/
+	PixelShader::process(primitiveAfterVS, renderTarget);
 }
 
 }
