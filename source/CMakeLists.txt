@@ -26,6 +26,7 @@ set(DV_MATH_SOURCE_FILES
 	math/dv_matrix4.cpp
 	math/dv_math_util.h
 	math/dv_math_util.cpp
+	math/dv_fixmath.h
 )
 source_group("math" FILES ${DV_MATH_SOURCE_FILES})
 
