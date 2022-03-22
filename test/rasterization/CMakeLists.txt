@@ -10,8 +10,6 @@ endif()
 
 add_executable(dvt_raster
     dvr_main.cpp
-    dvr_rasterizer.h
-    dvr_rasterizer.cpp
     dvr_triangle.h
     dvr_triangle.cpp
 )

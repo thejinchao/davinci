@@ -3,9 +3,7 @@ using namespace davinci;
 
 #include <GLFW/glfw3.h>
 
-#include "dvr_rasterizer.h"
 #include "dvr_triangle.h"
-#include "dvr_benchmark.h"
 
 //-------------------------------------------------------------------------------------
 enum MouseAction
