@@ -8,17 +8,17 @@ public:
 	TexturePtr sampler;
 	struct PSConstantBuffer
 	{
-		Vector3 lightDir[kLightCounts];
-		Vector3 lightColor[kLightCounts];
+		fVector3 lightDir[kLightCounts];
+		fVector3 lightColor[kLightCounts];
 	};
 
-	void setLightColor(size_t index, const Vector3& lightColor) {
+	void setLightColor(size_t index, const fVector3& lightColor) {
 		assert(index >= 0 && index < kLightCounts);
 
 		m_lightColor[index] = lightColor;
 	}
 
-	void setLightDir(size_t index, const Vector3& lightDir) {
+	void setLightDir(size_t index, const fVector3& lightDir) {
 		assert(index >= 0 && index < kLightCounts);
 
 		m_lightDir[index] = lightDir;
@@ -34,26 +34,26 @@ public:
 		renderable->setPSConstantBuffer(0, (const uint8_t*)&param, sizeof(PSConstantBuffer));
 	}
 
-	virtual void psFunction(ConstConstantBufferPtr constantBuffer, const float* input, Vector4& color, float& depth) const {
+	virtual void psFunction(ConstConstantBufferPtr constantBuffer, const float* input, fVector4& color, float& depth) const {
 		const PSIN* psin = (const PSIN*)(input);
 
 		const PSConstantBuffer* param = (const PSConstantBuffer*)constantBuffer->getBuffer(0);
 
-		Vector3 finalColor = Vector3::ZERO;
+		fVector3 finalColor = fVector3::ZERO;
 
 		//do NdotL lighting for all lights
 		for (int i = 0; i<2; i++)
 		{
 			finalColor += (param->lightDir[i].dotProduct(psin->normal) * param->lightColor[i]).saturate();
 		}
-		color = Vector4(finalColor, 1.f);
+		color = fVector4(finalColor, 1.f);
 
 		depth = psin->pos.z;
 	}
 
 private:
-	Vector3 m_lightDir[kLightCounts];
-	Vector3 m_lightColor[kLightCounts];
+	fVector3 m_lightDir[kLightCounts];
+	fVector3 m_lightColor[kLightCounts];
 
 public:
 	PixelShaderStandard() {}

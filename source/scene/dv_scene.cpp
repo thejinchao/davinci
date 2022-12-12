@@ -40,7 +40,7 @@ void Scene::render(const RenderDevice& device, const Camera& camera, RenderQueue
 {
 	renderQueue.setDevice(&device);
 	renderQueue.setCamera(camera);
-	m_root->render(Matrix4::IDENTITY, renderQueue);
+	m_root->render(fMatrix4::IDENTITY, renderQueue);
 }
 
 }

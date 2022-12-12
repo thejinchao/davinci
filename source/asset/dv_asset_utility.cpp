@@ -80,10 +80,10 @@ ModelPtr AssetUtility::createStandardModel_Box(RenderDevice* device, float x_siz
 		1.0f, 1.0f, 1.0f,		//22
 		-1.0f, 1.0f, 1.0f,		//23
 	};
-	#define RED_VERTEX		Vector3::RED.x, Vector3::RED.y, Vector3::RED.z
-	#define GREEN_VERTEX	Vector3::GREEN.x, Vector3::GREEN.y, Vector3::GREEN.z
-	#define BLUE_VERTEX		Vector3::BLUE.x, Vector3::BLUE.y, Vector3::BLUE.z
-	#define WHITE_VERTEX	Vector3::WHITE.x, Vector3::WHITE.y, Vector3::WHITE.z
+	#define RED_VERTEX		fVector3::RED.x, fVector3::RED.y, fVector3::RED.z
+	#define GREEN_VERTEX	fVector3::GREEN.x, fVector3::GREEN.y, fVector3::GREEN.z
+	#define BLUE_VERTEX		fVector3::BLUE.x, fVector3::BLUE.y, fVector3::BLUE.z
+	#define WHITE_VERTEX	fVector3::WHITE.x, fVector3::WHITE.y, fVector3::WHITE.z
 
 	float box_color[] = {
 		RED_VERTEX, GREEN_VERTEX, BLUE_VERTEX, WHITE_VERTEX,	//0, 1, 2, 3
@@ -198,7 +198,7 @@ ModelPtr AssetUtility::createStandardModel_Box(RenderDevice* device, float x_siz
 
 	//add model part
 	Model::Node& modelNode = modelPtr->m_root;
-	modelNode.m_transform = Matrix4::makeScale(x_size, y_size, z_size);
+	modelNode.m_transform = fMatrix4::makeScale(x_size, y_size, z_size);
 	modelNode.m_parts.push_back(0);
 
 	return modelPtr;
@@ -333,7 +333,7 @@ ModelPtr AssetUtility::createStandardModel_Sphere(RenderDevice* device, float ra
 
 	//add model part
 	Model::Node& modelNode = modelPtr->m_root;
-	modelNode.m_transform = Matrix4::IDENTITY;
+	modelNode.m_transform = fMatrix4::IDENTITY;
 	modelNode.m_parts.push_back(0);
 
 	return modelPtr;
@@ -341,7 +341,7 @@ ModelPtr AssetUtility::createStandardModel_Sphere(RenderDevice* device, float ra
 
 //-------------------------------------------------------------------------------------
 TexturePtr AssetUtility::createStandardTexture(RenderDevice* device, int32_t width, int32_t height, int32_t gridSize,
-	const Vector3& ltColor, const Vector3& rtColor, const Vector3& lbColor, const Vector3& rbColor)
+	const fVector3& ltColor, const fVector3& rtColor, const fVector3& lbColor, const fVector3& rbColor)
 {
 	#define  _edge(ax, ay, bx, by, px, py)  ((px - ax) * (by - ay) - (py - ay) * (bx - ax))
 
@@ -350,22 +350,22 @@ TexturePtr AssetUtility::createStandardTexture(RenderDevice* device, int32_t wid
 	float area = -(float)width*height;
 
 	for (int32_t i = 0; i < height; i++) {
-		Vector3* p = (Vector3*)(&(texturePtr->m_pixelData[(size_t)(i*width*(texturePtr->getPixelSize()))]));
-		Vector3 color;
+		fVector3* p = (fVector3*)(&(texturePtr->m_pixelData[(size_t)(i*width*(texturePtr->getPixelSize()))]));
+		fVector3 color;
 		for (int32_t j = 0; j < width; j++) {
 			if (j < width - i) {
 				int32_t w0 = _edge(width, 0, 0, height, j, i);
 				int32_t w1 = _edge(0, height, 0, 0, j, i);
 				int32_t w2 = _edge(0, 0, width, 0, j, i);
 
-				color = MathUtil::lerp3(ltColor, rtColor, lbColor, Vector3(w0 / area, w1 / area, w2 / area));
+				color = MathUtil::lerp3(ltColor, rtColor, lbColor, fVector3(w0 / area, w1 / area, w2 / area));
 			}
 			else {
 				int32_t w0 = _edge(width, height, 0, height, j, i);
 				int32_t w1 = _edge(0, height, width, 0, j, i);
 				int32_t w2 = _edge(width, 0, width, height, j, i);
 
-				color = MathUtil::lerp3(rtColor, rbColor, lbColor, Vector3(w0 / area, w1 / area, w2 / area));
+				color = MathUtil::lerp3(rtColor, rbColor, lbColor, fVector3(w0 / area, w1 / area, w2 / area));
 			}
 
 			bool inGrid = ((i / gridSize) & 1);
@@ -529,7 +529,7 @@ bool AssetUtility::savePixelBufferToPNG(const char* filename, int32_t width, int
 		case PNG_COLOR_TYPE_RGB:
 		{
 			for (int32_t y = 0; y < height; y++) {
-				const Vector3* p = (const Vector3*)pixelData + (height - 1 - y)*width;
+				const fVector3* p = (const fVector3*)pixelData + (height - 1 - y)*width;
 				for (int32_t x = 0; x < width; x++) {
 					row[x * 3 + 0] = (uint8_t)(p->x * 255);
 					row[x * 3 + 1] = (uint8_t)(p->y * 255);
@@ -545,7 +545,7 @@ bool AssetUtility::savePixelBufferToPNG(const char* filename, int32_t width, int
 		case PNG_COLOR_TYPE_RGB_ALPHA:
 		{
 			for (int32_t y = 0; y < height; y++) {
-				const Vector4* p = (const Vector4*)pixelData + (height - 1 - y)*width;
+				const fVector4* p = (const fVector4*)pixelData + (height - 1 - y)*width;
 				for (int32_t x = 0; x < width; x++) {
 					row[x * 4 + 0] = (uint8_t)(p->x * 255);
 					row[x * 4 + 1] = (uint8_t)(p->y * 255);
@@ -638,7 +638,7 @@ void _parserModelNode(Model::Node& node, const rapidjson::Value& array_json, con
 		}
 
 		//transform
-		childNode.m_transform = Matrix4::IDENTITY;
+		childNode.m_transform = fMatrix4::IDENTITY;
 
 		//part(s)
 		if (node_json.HasMember("parts") && node_json["parts"].IsArray()) {

@@ -13,8 +13,8 @@ TEST(Math_Matrix4, Basic)
 	{
 		float data[4][4] = { { FOUR_RANDOM_FLOAT },{ FOUR_RANDOM_FLOAT },{ FOUR_RANDOM_FLOAT }, { FOUR_RANDOM_FLOAT } };
 
-		Matrix4 m1(data), m2(m1);
-		Matrix4 m3(
+		fMatrix4 m1(data), m2(m1);
+		fMatrix4 m3(
 			data[0][0], data[0][1], data[0][2], data[0][3],
 			data[1][0], data[1][1], data[1][2], data[1][3],
 			data[2][0], data[2][1], data[2][2], data[2][3],
@@ -27,7 +27,7 @@ TEST(Math_Matrix4, Basic)
 	}
 
 	{
-		Matrix4 m1(SIXTEEN_RANDOM_FLOAT), m2;
+		fMatrix4 m1(SIXTEEN_RANDOM_FLOAT), m2;
 
 		m2 = m1;
 		EXPECT_EQ_4X4(m1, m2);
@@ -46,10 +46,10 @@ TEST(Math_Matrix4, Algorithm)
 		float data1[16] = { SIXTEEN_RANDOM_FLOAT };
 		float data2[16] = { SIXTEEN_RANDOM_FLOAT };
 
-		Matrix4 m1(SIXTEEN_ELEMENT_ROW(data1)), m2(SIXTEEN_ELEMENT_ROW(data2));
+		fMatrix4 m1(SIXTEEN_ELEMENT_ROW(data1)), m2(SIXTEEN_ELEMENT_ROW(data2));
 		glm::mat4 gm1(SIXTEEN_ELEMENT_COL(data1)), gm2(SIXTEEN_ELEMENT_COL(data2));
 
-		Matrix4 m3 = m1 + m2;
+		fMatrix4 m3 = m1 + m2;
 		glm::mat4 gm3 = gm1 + gm2;
 
 		EXPECT_EQ_4X4_T(m3, gm3);
@@ -60,10 +60,10 @@ TEST(Math_Matrix4, Algorithm)
 		float data1[16] = { SIXTEEN_RANDOM_FLOAT };
 		float data2[16] = { SIXTEEN_RANDOM_FLOAT };
 
-		Matrix4 m1(SIXTEEN_ELEMENT_ROW(data1)), m2(SIXTEEN_ELEMENT_ROW(data2));
+		fMatrix4 m1(SIXTEEN_ELEMENT_ROW(data1)), m2(SIXTEEN_ELEMENT_ROW(data2));
 		glm::mat4 gm1(SIXTEEN_ELEMENT_COL(data1)), gm2(SIXTEEN_ELEMENT_COL(data2));
 
-		Matrix4 m3 = m1 - m2;
+		fMatrix4 m3 = m1 - m2;
 		glm::mat4 gm3 = gm1 - gm2;
 
 		EXPECT_EQ_4X4_T(m3, gm3);
@@ -74,10 +74,10 @@ TEST(Math_Matrix4, Algorithm)
 		float data1[16] = { SIXTEEN_RANDOM_FLOAT };
 		float data2[16] = { SIXTEEN_RANDOM_FLOAT };
 
-		Matrix4 m1(SIXTEEN_ELEMENT_ROW(data1)), m2(SIXTEEN_ELEMENT_ROW(data2));
+		fMatrix4 m1(SIXTEEN_ELEMENT_ROW(data1)), m2(SIXTEEN_ELEMENT_ROW(data2));
 		glm::mat4 gm1(SIXTEEN_ELEMENT_COL(data1)), gm2(SIXTEEN_ELEMENT_COL(data2));
 
-		Matrix4 m3 = m1 * m2;
+		fMatrix4 m3 = m1 * m2;
 		glm::mat4 gm3 = gm1 * gm2;
 
 		EXPECT_EQ_4X4_T(m3, gm3);
@@ -87,10 +87,10 @@ TEST(Math_Matrix4, Algorithm)
 	{
 		float data1[16] = { SIXTEEN_RANDOM_FLOAT };
 
-		Matrix4 m1(SIXTEEN_ELEMENT_ROW(data1));
+		fMatrix4 m1(SIXTEEN_ELEMENT_ROW(data1));
 		glm::mat4 gm1(SIXTEEN_ELEMENT_COL(data1));
 
-		Matrix4 m2 = -m1;
+		fMatrix4 m2 = -m1;
 		glm::mat4 gm2 = -gm1;
 
 		EXPECT_EQ_4X4_T(m2, gm2);
@@ -101,15 +101,15 @@ TEST(Math_Matrix4, Algorithm)
 		float data1[16] = { SIXTEEN_RANDOM_FLOAT };
 		float data2[4] = { FOUR_RANDOM_FLOAT };
 
-		Matrix4 m1(SIXTEEN_ELEMENT_ROW(data1));
-		Vector4 v1(data2);
-		Vector4 v2 = v1 * m1;
+		fMatrix4 m1(SIXTEEN_ELEMENT_ROW(data1));
+		fVector4 v1(data2);
+		fVector4 v2 = v1 * m1;
 
 		glm::mat4 gm1(SIXTEEN_ELEMENT_COL(data1));
 		glm::vec4 gv1(FOUR_ELEMENT(data2));
 		glm::vec4 gv2 = gv1 * gm1;
 
-		//Vector4 v2 = v1 * m1;
+		//fVector4 v2 = v1 * m1;
 		EXPECT_TRUE(_floatEqualWithRange(v2.x, gv2.x, std::numeric_limits<float>::epsilon() * 100));
 		EXPECT_TRUE(_floatEqualWithRange(v2.y, gv2.y, std::numeric_limits<float>::epsilon() * 100));
 		EXPECT_TRUE(_floatEqualWithRange(v2.z, gv2.z, std::numeric_limits<float>::epsilon() * 100));
@@ -121,15 +121,15 @@ TEST(Math_Matrix4, Algorithm)
 		float data1[16] = { SIXTEEN_RANDOM_FLOAT };
 		float data2[4] = { FOUR_RANDOM_FLOAT };
 
-		Matrix4 m1(SIXTEEN_ELEMENT_ROW(data1));
-		Vector4 v1(data2);
-		Vector4 v2 = m1 * v1;
+		fMatrix4 m1(SIXTEEN_ELEMENT_ROW(data1));
+		fVector4 v1(data2);
+		fVector4 v2 = m1 * v1;
 
 		glm::mat4 gm1(SIXTEEN_ELEMENT_COL(data1));
 		glm::vec4 gv1(FOUR_ELEMENT(data2));
 		glm::vec4 gv2 = gm1 * gv1;
 
-		//Vector4 v2 = v1 * m1;
+		//fVector4 v2 = v1 * m1;
 		EXPECT_TRUE(_floatEqualWithRange(v2.x, gv2.x, std::numeric_limits<float>::epsilon() * 100));
 		EXPECT_TRUE(_floatEqualWithRange(v2.y, gv2.y, std::numeric_limits<float>::epsilon() * 100));
 		EXPECT_TRUE(_floatEqualWithRange(v2.z, gv2.z, std::numeric_limits<float>::epsilon() * 100));
@@ -141,16 +141,16 @@ TEST(Math_Matrix4, Algorithm)
 		float data1[16] = { SIXTEEN_RANDOM_FLOAT };
 		float data2[3] = { THREE_RANDOM_FLOAT};
 
-		Matrix4 m1(SIXTEEN_ELEMENT_ROW(data1));
-		Vector3 v1(data2);
-		Vector3 v2 = m1 * v1;
+		fMatrix4 m1(SIXTEEN_ELEMENT_ROW(data1));
+		fVector3 v1(data2);
+		fVector3 v2 = m1 * v1;
 
 		glm::mat4 gm1(SIXTEEN_ELEMENT_COL(data1));
 		glm::vec4 gv1(THREE_ELEMENT(data2), 1);
 		glm::vec4 gv2 = gm1 * gv1;
 		gv2 /= gv2.w;
 
-		//Vector4 v2 = v1 * m1;
+		//fVector4 v2 = v1 * m1;
 		EXPECT_TRUE(_floatEqualWithRange(v2.x, gv2.x, std::numeric_limits<float>::epsilon() * 100));
 		EXPECT_TRUE(_floatEqualWithRange(v2.y, gv2.y, std::numeric_limits<float>::epsilon() * 100));
 		EXPECT_TRUE(_floatEqualWithRange(v2.z, gv2.z, std::numeric_limits<float>::epsilon() * 100));
@@ -161,9 +161,9 @@ TEST(Math_Matrix4, Algorithm)
 		float data1[16] = { SIXTEEN_RANDOM_FLOAT };
 		float data2[3] = { THREE_RANDOM_FLOAT };
 
-		Matrix4 m1(SIXTEEN_ELEMENT_ROW(data1));
-		Vector3 v1(data2);
-		Vector3 v2 = v1 * m1;
+		fMatrix4 m1(SIXTEEN_ELEMENT_ROW(data1));
+		fVector3 v1(data2);
+		fVector3 v2 = v1 * m1;
 
 		glm::mat4 gm1(SIXTEEN_ELEMENT_COL(data1));
 		glm::vec4 gv1(THREE_ELEMENT(data2), 1);
@@ -180,8 +180,8 @@ TEST(Math_Matrix4, Algorithm)
 		float data[16] = { SIXTEEN_RANDOM_FLOAT };
 		float a = _randomFloat();
 
-		Matrix4 m1(SIXTEEN_ELEMENT_ROW(data));
-		Matrix4 m2 = m1 * a, m3 = a * m1;
+		fMatrix4 m1(SIXTEEN_ELEMENT_ROW(data));
+		fMatrix4 m2 = m1 * a, m3 = a * m1;
 
 		glm::mat4 gm1(SIXTEEN_ELEMENT_COL(data));
 		glm::mat4 gm2 = gm1 * a;
@@ -194,7 +194,7 @@ TEST(Math_Matrix4, Algorithm)
 	{
 		float trans_data[] = { THREE_RANDOM_FLOAT };
 
-		Matrix4 m1 = Matrix4::makeTrans(THREE_ELEMENT(trans_data));
+		fMatrix4 m1 = fMatrix4::makeTrans(THREE_ELEMENT(trans_data));
 		glm::mat4 gm1 = glm::translate(glm::mat4(1), glm::vec3(THREE_ELEMENT(trans_data)));
 
 		glm::mat4 gm1_t = glm::transpose(gm1);
@@ -205,7 +205,7 @@ TEST(Math_Matrix4, Algorithm)
 	{
 		float scale_data[] = { THREE_RANDOM_FLOAT };
 
-		Matrix4 m1 = Matrix4::makeScale(THREE_ELEMENT(scale_data));
+		fMatrix4 m1 = fMatrix4::makeScale(THREE_ELEMENT(scale_data));
 		glm::mat4 gm1 = glm::scale(glm::mat4(1.0f), glm::vec3(THREE_ELEMENT(scale_data)));
 
 		EXPECT_EQ_4X4_T(m1, gm1);
@@ -215,8 +215,8 @@ TEST(Math_Matrix4, Algorithm)
 	{
 		float data[16] = { SIXTEEN_RANDOM_FLOAT };
 
-		Matrix4 m1(SIXTEEN_ELEMENT_ROW(data));
-		Matrix4 m2 = m1.transpose();
+		fMatrix4 m1(SIXTEEN_ELEMENT_ROW(data));
+		fMatrix4 m2 = m1.transpose();
 
 		glm::mat4 gm1(SIXTEEN_ELEMENT_COL(data));
 		glm::mat4 gm2 = glm::transpose(gm1);
@@ -228,8 +228,8 @@ TEST(Math_Matrix4, Algorithm)
 	{
 		float data[16] = { SIXTEEN_RANDOM_FLOAT };
 
-		Matrix4 m1(SIXTEEN_ELEMENT_ROW(data));
-		Matrix4 m2 = m1.inverse();
+		fMatrix4 m1(SIXTEEN_ELEMENT_ROW(data));
+		fMatrix4 m2 = m1.inverse();
 
 		glm::mat4 gm1(SIXTEEN_ELEMENT_COL(data));
 		glm::mat4 gm2 = glm::inverse(gm1);
@@ -243,10 +243,10 @@ TEST(Math_Matrix4, Algorithm)
 		float dAt[3]  = { 0.0f, 1.0f, 0.0f };
 		float dUp[3]  = { 0.0f, 1.0f, 0.0f };
 
-		Matrix4 m1 = Matrix4::lookatLH(
-			Vector3(THREE_ELEMENT(dEye)),
-			Vector3(THREE_ELEMENT(dAt)),
-			Vector3(THREE_ELEMENT(dUp)));
+		fMatrix4 m1 = fMatrix4::lookatLH(
+			fVector3(THREE_ELEMENT(dEye)),
+			fVector3(THREE_ELEMENT(dAt)),
+			fVector3(THREE_ELEMENT(dUp)));
 
 		glm::mat4 gm1 = glm::lookAtLH(glm::vec3(THREE_ELEMENT(dEye)), glm::vec3(THREE_ELEMENT(dAt)), glm::vec3(THREE_ELEMENT(dUp)));
 		glm::mat4 gm1_t = glm::transpose(gm1);
@@ -257,18 +257,18 @@ TEST(Math_Matrix4, Algorithm)
 	//lookat view matrix(random)
 	{
 		for (int i = 0; i < 10; i++) {
-			Vector3 dEye, dAt, dUp;
+			fVector3 dEye, dAt, dUp;
 			do {
 				dEye[0] = _randomFloat(); dEye[1] = _randomFloat(); dEye[2] = _randomFloat();
 				dAt[0] = _randomFloat(); dAt[1] = _randomFloat(); dAt[2] = _randomFloat();
 				dUp[0] = _randomFloat(); dUp[1] = _randomFloat(); dUp[2] = _randomFloat();
 
-			} while ((dEye==dAt) || (dUp == Vector3::ZERO));
+			} while ((dEye==dAt) || (dUp == fVector3::ZERO));
 
-			Matrix4 m1 = Matrix4::lookatLH(
-				Vector3(THREE_ELEMENT(dEye)),
-				Vector3(THREE_ELEMENT(dAt)),
-				Vector3(THREE_ELEMENT(dUp)));
+			fMatrix4 m1 = fMatrix4::lookatLH(
+				fVector3(THREE_ELEMENT(dEye)),
+				fVector3(THREE_ELEMENT(dAt)),
+				fVector3(THREE_ELEMENT(dUp)));
 
 			glm::mat4 gm1 = glm::lookAtLH(glm::vec3(THREE_ELEMENT(dEye)), glm::vec3(THREE_ELEMENT(dAt)), glm::vec3(THREE_ELEMENT(dUp)));
 			glm::mat4 gm1_t = glm::transpose(gm1);
@@ -281,7 +281,7 @@ TEST(Math_Matrix4, Algorithm)
 	{
 		float width = 640.f, height = 480.f;
 
-		Matrix4 m1 = Matrix4::perspectiveFovLH(MathUtil::PI_DIV4, width / height, 0.01f, 100.f);
+		fMatrix4 m1 = fMatrix4::perspectiveFovLH(MathUtil::PI_DIV4, width / height, 0.01f, 100.f);
 		glm::mat4 gm1 = glm::perspectiveLH(MathUtil::PI_DIV4, width / height, 0.01f, 100.f);
 		glm::mat4 gm1_t = glm::transpose(gm1);
 
@@ -296,7 +296,7 @@ TEST(Math_Matrix4, Algorithm)
 			float zNear = MathUtil::rangeRandom(0.00001f, 0.01f);
 			float zFar = MathUtil::rangeRandom(100.f, 10000.f);
 
-			Matrix4 m1 = Matrix4::perspectiveFovLH(fov, aspect, zNear, zFar);
+			fMatrix4 m1 = fMatrix4::perspectiveFovLH(fov, aspect, zNear, zFar);
 			glm::mat4 gm1 = glm::perspectiveLH(fov, aspect, zNear, zFar);
 			glm::mat4 gm1_t = glm::transpose(gm1);
 

@@ -28,10 +28,10 @@ const float		MIN_SCALE = 4.f;
 const float		MAX_SCALE = 60.f;
 const float		TRIANGLE_BORDER_WIDTH = 1.5f;
 const float		ACTION_WIDTH = 1.f;
-const Vector3	GRID_BORDER_COLOR = Vector3(0.f, 0.f, 0.f);
-const Vector3	GRID_CROSS_COLOR = Vector3(0.8f, 0.8f, 0.8f);
-const Vector3	TRIANGLE_BORDER_COLOR = Vector3(0.f, 0.f, 0.f);
-const Vector3	ACTION_COLOR = Vector3(1.f, 0.f, 0.f);
+const fVector3	GRID_BORDER_COLOR = fVector3(0.f, 0.f, 0.f);
+const fVector3	GRID_CROSS_COLOR = fVector3(0.8f, 0.8f, 0.8f);
+const fVector3	TRIANGLE_BORDER_COLOR = fVector3(0.f, 0.f, 0.f);
+const fVector3	ACTION_COLOR = fVector3(1.f, 0.f, 0.f);
 
 //-------------------------------------------------------------------------------------
 int				g_viewWidth = 1024;
@@ -81,7 +81,7 @@ static void _drawGrid(void)
 	int32_t verLength = (int32_t)floorf(g_viewHeight / g_scale);
 	float lineDepth = ED_GRID_BORDER / 10.f;
 
-	Vector3 lineColor[] = { Vector3(0.f, 0.f, 0.f), Vector3(0.5f, 0.5f, 0.5f), Vector3(0.7f,0.7f,0.7f), Vector3(0.9f, 0.9f,0.9f) };
+	fVector3 lineColor[] = { fVector3(0.f, 0.f, 0.f), fVector3(0.5f, 0.5f, 0.5f), fVector3(0.7f,0.7f,0.7f), fVector3(0.9f, 0.9f,0.9f) };
 
 	glBegin(GL_LINES);
 	// Horizontal lines
@@ -155,7 +155,7 @@ static void _drawTrianglePixel(const Triangle& triangle, float depth)
 }
 
 //-------------------------------------------------------------------------------------
-static void _drawTriangleBorder(const Triangle& triangle, const Vector3& color, float lineWidth, float depth)
+static void _drawTriangleBorder(const Triangle& triangle, const fVector3& color, float lineWidth, float depth)
 {
 	glEnable(GL_LINE_SMOOTH);
 	glHint(GL_LINE_SMOOTH, GL_NICEST);
@@ -191,7 +191,7 @@ static void _drawTriangles(void)
 }
 
 //-------------------------------------------------------------------------------------
-static void _drawSegmentInAABB(const Vector2& p0, const Vector2& p1, float xMin, float xMax, float yMin, float yMax)
+static void _drawSegmentInAABB(const fVector2& p0, const fVector2& p1, float xMin, float xMax, float yMin, float yMax)
 {
 	glEnable(GL_LINE_SMOOTH);
 	glHint(GL_LINE_SMOOTH, GL_NICEST);
@@ -381,14 +381,14 @@ static void _onCursorPos(GLFWwindow* window, double x, double y)
 	{
 	case MT_FIRST_LINE:
 	{
-		g_currentTriangle.p1 = Vector3(g_posX, g_posY, 0);
+		g_currentTriangle.p1 = fVector3(g_posX, g_posY, 0);
 		g_bNeedRedraw = true;
 	}
 	break;
 
 	case MT_TRIANGLE:
 	{
-		g_currentTriangle.p2 = Vector3(g_posX, g_posY, 0);
+		g_currentTriangle.p2 = fVector3(g_posX, g_posY, 0);
 		g_bNeedRedraw = true;
 	}
 	break;
@@ -406,7 +406,7 @@ static void _onMouseButton(GLFWwindow* window, int button, int action, int mods)
 		switch (g_currentAction) {
 		case MT_NULL:
 		{
-			g_currentTriangle.p0 = g_currentTriangle.p1 = Vector3(g_posX, g_posY, 0);
+			g_currentTriangle.p0 = g_currentTriangle.p1 = fVector3(g_posX, g_posY, 0);
 
 			g_currentAction = MT_FIRST_LINE;
 			g_bDrawExtension = false;
@@ -415,7 +415,7 @@ static void _onMouseButton(GLFWwindow* window, int button, int action, int mods)
 
 		case MT_FIRST_LINE:
 		{
-			g_currentTriangle.p1 = g_currentTriangle.p2 = Vector3(g_posX, g_posY, 0);
+			g_currentTriangle.p1 = g_currentTriangle.p2 = fVector3(g_posX, g_posY, 0);
 
 			g_currentAction = MT_TRIANGLE;
 			g_bDrawExtension = true;
@@ -424,11 +424,11 @@ static void _onMouseButton(GLFWwindow* window, int button, int action, int mods)
 
 		case MT_TRIANGLE:
 		{
-			g_currentTriangle.p2 = Vector3(g_posX, g_posY, 0);
+			g_currentTriangle.p2 = fVector3(g_posX, g_posY, 0);
 			g_currentAction = MT_NULL;
 
 			//build triangle
-			Vector3 randColor = Vector3(rand()*0.8f / RAND_MAX, rand()*0.8f / RAND_MAX, rand()*0.8f / RAND_MAX);
+			fVector3 randColor = fVector3(rand()*0.8f / RAND_MAX, rand()*0.8f / RAND_MAX, rand()*0.8f / RAND_MAX);
 
 			g_currentTriangle.build(randColor, g_canvasWidth, g_canvasHeight, true);
 			g_allTriangles.push_back(g_currentTriangle);
@@ -499,10 +499,10 @@ static void _buildDemoTriangles(void)
 	size_t triangleCounts = sizeof(triangleData) / (6 * sizeof(float));
 	for (size_t i = 0; i < triangleCounts; i++) {
 
-		Vector3 p0(triangleData[i * 6 + 0], triangleData[i * 6 + 1], 0.f);
-		Vector3 p1(triangleData[i * 6 + 2], triangleData[i * 6 + 3], 0.f);
-		Vector3 p2(triangleData[i * 6 + 4], triangleData[i * 6 + 5], 0.f);
-		Vector3 randColor = Vector3(rand()*0.8f / RAND_MAX, rand()*0.8f / RAND_MAX, rand()*0.8f / RAND_MAX);
+		fVector3 p0(triangleData[i * 6 + 0], triangleData[i * 6 + 1], 0.f);
+		fVector3 p1(triangleData[i * 6 + 2], triangleData[i * 6 + 3], 0.f);
+		fVector3 p2(triangleData[i * 6 + 4], triangleData[i * 6 + 5], 0.f);
+		fVector3 randColor = fVector3(rand()*0.8f / RAND_MAX, rand()*0.8f / RAND_MAX, rand()*0.8f / RAND_MAX);
 
 		Triangle triangle(p0, p1, p2);
 		triangle.build(randColor, g_canvasWidth, g_canvasHeight, false);
@@ -522,8 +522,8 @@ void foo(void)
 	debug.edge_id = 0; 
 	
 	{
-		Vector3 v0(1, 2, 0), v1(7, 4, 0), v2(5, 2, 0);
-		Rasterizer::drawTriangleLarrabee(1024, 1024, v0, v1, v2, [](const std::pair<int32_t, int32_t>& pos, const Vector3&) {
+		fVector3 v0(1, 2, 0), v1(7, 4, 0), v2(5, 2, 0);
+		Rasterizer::drawTriangleLarrabee(1024, 1024, v0, v1, v2, [](const std::pair<int32_t, int32_t>& pos, const fVector3&) {
 			printf("%d, %d\n", pos.first, pos.second);
 		}, &debug);
 	}
@@ -531,15 +531,15 @@ void foo(void)
 
 
 	{
-		Vector3 v0(824.796997f, 272.355164f, 0), v1(651.741699f, 173.502167f, 0), v2(787.095825f, 323.581726f, 0);
-		Rasterizer::drawTriangleLarrabee(1024, 1024, v0, v1, v2, [](const std::pair<int32_t, int32_t>& pos, const Vector3&) {
+		fVector3 v0(824.796997f, 272.355164f, 0), v1(651.741699f, 173.502167f, 0), v2(787.095825f, 323.581726f, 0);
+		Rasterizer::drawTriangleLarrabee(1024, 1024, v0, v1, v2, [](const std::pair<int32_t, int32_t>& pos, const fVector3&) {
 			//printf("%d, %d\n", pos.first, pos.second);
 		}, &debug);
 	}
 
 	{
-		Vector3 v0(651.741699f, 173.502167f, 0), v1(824.796997f, 272.355164f, 0), v2(1024.f, 0.f, 0);
-		Rasterizer::drawTriangleLarrabee(1024, 1024, v0, v1, v2, [](const std::pair<int32_t, int32_t>& pos, const Vector3&) {
+		fVector3 v0(651.741699f, 173.502167f, 0), v1(824.796997f, 272.355164f, 0), v2(1024.f, 0.f, 0);
+		Rasterizer::drawTriangleLarrabee(1024, 1024, v0, v1, v2, [](const std::pair<int32_t, int32_t>& pos, const fVector3&) {
 			//printf("%d, %d\n", pos.first, pos.second);
 		}, &debug);
 	}

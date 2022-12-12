@@ -16,7 +16,7 @@
 int32_t g_screenWidth = 512;
 int32_t g_screenHeight = 256;
 uint32_t g_canvasTexture;
-Sample02 g_dvScene;
+Sample03 g_dvScene;
 
 //-------------------------------------------------------------------------------------
 void processInput(GLFWwindow *window)

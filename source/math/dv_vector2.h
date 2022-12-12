@@ -6,160 +6,161 @@
 namespace davinci
 {
 
-class Vector2
+template<typename T>
+class TVector2
 {
 public:
-	float x, y;
+	T x, y;
 
 public:
 	// Construct
-	Vector2() : x(0.f), y(0.f) { }
-	Vector2(float _x, float _y) : x(_x), y(_y){ }
-	inline explicit Vector2(const float s) : x(s), y(s) { }
-	inline explicit Vector2(const float f[2]) : x(f[0]), y(f[1]) { }
-	inline explicit Vector2(float* const f) : x(f[0]), y(f[1]) { }
-	inline explicit Vector2(const int f[2]) : x((float)f[0]), y((float)f[1]) { }
+	TVector2() : x(0), y(0) { }
+	TVector2(T _x, T _y) : x(_x), y(_y){ }
+	inline explicit TVector2(const T s) : x(s), y(s) { }
+	inline explicit TVector2(const T f[2]) : x(f[0]), y(f[1]) { }
+	inline explicit TVector2(T* const f) : x(f[0]), y(f[1]) { }
+	inline explicit TVector2(const int f[2]) : x((T)f[0]), y((T)f[1]) { }
 
 public:
-	inline float operator [] (const size_t i) const {
+	inline T operator [] (const size_t i) const {
 		assert(i < 2);
 		return *(&x + i);
 	}
 
-	inline float& operator [] (const size_t i) {
+	inline T& operator [] (const size_t i) {
 		assert(i < 2);
 		return *(&x + i);
 	}
 
-	inline float* ptr(void) {
+	inline T* ptr(void) {
 		return &x;
 	}
 
-	inline const float* ptr(void) const {
+	inline const T* ptr(void) const {
 		return &x;
 	}
 public:
 	// Operations
-	inline Vector2& operator = (const Vector2& rkVector) {
+	inline TVector2& operator = (const TVector2& rkVector) {
 		x = rkVector.x;
 		y = rkVector.y;
 		return *this;
 	}
 
-	inline Vector2& operator = (const float fScalar) {
+	inline TVector2& operator = (const T fScalar) {
 		x = fScalar;
 		y = fScalar;
 		return *this;
 	}
 
-	inline bool operator == (const Vector2& rkVector) const {
+	inline bool operator == (const TVector2& rkVector) const {
 		return (x == rkVector.x && y == rkVector.y);
 	}
 
-	inline bool operator != (const Vector2& rkVector) const {
+	inline bool operator != (const TVector2& rkVector) const {
 		return (x != rkVector.x || y != rkVector.y);
 	}
 
 public:
 	// Arithmetic operations
-	inline Vector2 operator + (const Vector2& rkVector) const {
-		return Vector2( x + rkVector.x, y + rkVector.y);
+	inline TVector2 operator + (const TVector2& rkVector) const {
+		return TVector2( x + rkVector.x, y + rkVector.y);
 	}
 
-	inline Vector2 operator - (const Vector2& rkVector) const {
-		return Vector2( x - rkVector.x, y - rkVector.y);
+	inline TVector2 operator - (const TVector2& rkVector) const {
+		return TVector2( x - rkVector.x, y - rkVector.y);
 	}
 
-	inline Vector2 operator * (const float fScalar) const {
-		return Vector2( x * fScalar, y * fScalar);
+	inline TVector2 operator * (const T fScalar) const {
+		return TVector2( x * fScalar, y * fScalar);
 	}
 
-	inline Vector2 operator * (const Vector2& rhs) const {
-		return Vector2(x * rhs.x, y * rhs.y);
+	inline TVector2 operator * (const TVector2& rhs) const {
+		return TVector2(x * rhs.x, y * rhs.y);
 	}
 
-	inline Vector2 operator / (const float fScalar) const {
+	inline TVector2 operator / (const T fScalar) const {
 		assert(fScalar != 0.0);
-		return Vector2(x / fScalar, y / fScalar);
+		return TVector2(x / fScalar, y / fScalar);
 	}
 
-	inline Vector2 operator / (const Vector2& rhs) const {
-		return Vector2( x / rhs.x, y / rhs.y);
+	inline TVector2 operator / (const TVector2& rhs) const {
+		return TVector2( x / rhs.x, y / rhs.y);
 	}
 
-	inline const Vector2& operator + () const {
+	inline const TVector2& operator + () const {
 		return *this;
 	}
 
-	inline Vector2 operator - () const {
-		return Vector2(-x, -y);
+	inline TVector2 operator - () const {
+		return TVector2(-x, -y);
 	}
 
 public:
-	// overloaded operators to help Vector2
-	inline friend Vector2 operator * (const float fScalar, const Vector2& rkVector) {
-		return Vector2(fScalar * rkVector.x, fScalar * rkVector.y);
+	// overloaded operators to help TVector2
+	inline friend TVector2 operator * (const T fScalar, const TVector2& rkVector) {
+		return TVector2(fScalar * rkVector.x, fScalar * rkVector.y);
 	}
 
-	inline friend Vector2 operator / (const float fScalar, const Vector2& rkVector) {
-		return Vector2( fScalar / rkVector.x, fScalar / rkVector.y);
+	inline friend TVector2 operator / (const T fScalar, const TVector2& rkVector) {
+		return TVector2( fScalar / rkVector.x, fScalar / rkVector.y);
 	}
 
-	inline friend Vector2 operator + (const Vector2& lhs, const float rhs) {
-		return Vector2( lhs.x + rhs, lhs.y + rhs);
+	inline friend TVector2 operator + (const TVector2& lhs, const T rhs) {
+		return TVector2( lhs.x + rhs, lhs.y + rhs);
 	}
 
-	inline friend Vector2 operator + (const float lhs, const Vector2& rhs) {
-		return Vector2( lhs + rhs.x, lhs + rhs.y);
+	inline friend TVector2 operator + (const T lhs, const TVector2& rhs) {
+		return TVector2( lhs + rhs.x, lhs + rhs.y);
 	}
 
-	inline friend Vector2 operator - (const Vector2& lhs, const float rhs) {
-		return Vector2( lhs.x - rhs, lhs.y - rhs);
+	inline friend TVector2 operator - (const TVector2& lhs, const T rhs) {
+		return TVector2( lhs.x - rhs, lhs.y - rhs);
 	}
 
-	inline friend Vector2 operator - (const float lhs, const Vector2& rhs) {
-		return Vector2( lhs - rhs.x, lhs - rhs.y);
+	inline friend TVector2 operator - (const T lhs, const TVector2& rhs) {
+		return TVector2( lhs - rhs.x, lhs - rhs.y);
 	}
 
 public:
 	// arithmetic updates
-	inline Vector2& operator += (const Vector2& rkVector) {
+	inline TVector2& operator += (const TVector2& rkVector) {
 		x += rkVector.x;
 		y += rkVector.y;
 		return *this;
 	}
 
-	inline Vector2& operator += (const float fScaler) {
+	inline TVector2& operator += (const T fScaler) {
 		x += fScaler;
 		y += fScaler;
 		return *this;
 	}
 
-	inline Vector2& operator -= (const Vector2& rkVector) {
+	inline TVector2& operator -= (const TVector2& rkVector) {
 		x -= rkVector.x;
 		y -= rkVector.y;
 		return *this;
 	}
 
-	inline Vector2& operator -= (const float fScaler) {
+	inline TVector2& operator -= (const T fScaler) {
 		x -= fScaler;
 		y -= fScaler;
 		return *this;
 	}
 
-	inline Vector2& operator *= (const float fScalar) {
+	inline TVector2& operator *= (const T fScalar) {
 		x *= fScalar;
 		y *= fScalar;
 		return *this;
 	}
 
-	inline Vector2& operator *= (const Vector2& rkVector) {
+	inline TVector2& operator *= (const TVector2& rkVector) {
 		x *= rkVector.x;
 		y *= rkVector.y;
 		return *this;
 	}
 
-	inline Vector2& operator /= (const float fScalar) {
+	inline TVector2& operator /= (const T fScalar) {
 		assert(fScalar != 0.0);
 
 		x /= fScalar;
@@ -167,49 +168,49 @@ public:
 		return *this;
 	}
 
-	inline Vector2& operator /= (const Vector2& rkVector) {
+	inline TVector2& operator /= (const TVector2& rkVector) {
 		x /= rkVector.x;
 		y /= rkVector.y;
 		return *this;
 	}
 
-	inline bool operator < (const Vector2& rhs) const {
+	inline bool operator < (const TVector2& rhs) const {
 		return (x < rhs.x && y < rhs.y);
 	}
 
-	inline bool operator > (const Vector2& rhs) const {
+	inline bool operator > (const TVector2& rhs) const {
 		return (x > rhs.x && y > rhs.y);
 	}
 
 public:
-	inline float length(void) const {
+	inline T length(void) const {
 		return MathUtil::sqrt(x * x + y * y);
 	}
 
-	inline float squaredLength(void) const {
+	inline T squaredLength(void) const {
 		return x * x + y * y;
 	}
 
-	inline float distance(const Vector2& rhs) const {
+	inline T distance(const TVector2& rhs) const {
 		return (*this - rhs).length();
 	}
 
-	inline float squaredDistance(const Vector2& rhs) const {
+	inline T squaredDistance(const TVector2& rhs) const {
 		return (*this - rhs).squaredLength();
 	}
 
-	inline float dotProduct(const Vector2& vec) const {
+	inline T dotProduct(const TVector2& vec) const {
 		return x * vec.x + y * vec.y;
 	}
 
-	inline float crossProduct(const Vector2& rkVector) const {
+	inline T crossProduct(const TVector2& rkVector) const {
 		return x * rkVector.y - y * rkVector.x;
 	}
 
-	inline Vector2& normalise(void) {
-		float fLength = length();
+	inline TVector2& normalise(void) {
+		T fLength = length();
 		if (fLength > 0.0f) {
-			float invLength = 1.f / fLength;
+			T invLength = T(1.0) / fLength;
 			x *= invLength;
 			y *= invLength;
 		}
@@ -217,7 +218,7 @@ public:
 		return *this;
 	}
 
-	inline Vector2& saturate(void) {
+	inline TVector2& saturate(void) {
 		x = MathUtil::saturate(x);
 		y = MathUtil::saturate(y);
 
@@ -225,13 +226,16 @@ public:
 	}
 public:
 	// special points
-	static const Vector2 ZERO;
-	static const Vector2 ONE;
-	static const Vector2 UNIT_X;
-	static const Vector2 UNIT_Y;
-	static const Vector2 NEGATIVE_UNIT_X;
-	static const Vector2 NEGATIVE_UNIT_Y;
-	static const Vector2 UNIT_SCALE;
+	static const TVector2 ZERO;
+	static const TVector2 ONE;
+	static const TVector2 UNIT_X;
+	static const TVector2 UNIT_Y;
+	static const TVector2 NEGATIVE_UNIT_X;
+	static const TVector2 NEGATIVE_UNIT_Y;
+	static const TVector2 UNIT_SCALE;
 };
+
+
+typedef TVector2<float> fVector2;
 
 }

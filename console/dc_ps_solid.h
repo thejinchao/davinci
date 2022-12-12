@@ -7,7 +7,7 @@ class PixelShaderSolid : public PixelShader
 public:
 	struct PSConstantBuffer
 	{
-		Vector3 solidColor;
+		fVector3 solidColor;
 	};
 
 public:
@@ -17,19 +17,19 @@ public:
 		renderable->setPSConstantBuffer(0, (const uint8_t*)&param, sizeof(PSConstantBuffer));
 	}
 
-	virtual void psFunction(ConstConstantBufferPtr constantBuffer, const float* input, Vector4& color, float& depth) const {
+	virtual void psFunction(ConstConstantBufferPtr constantBuffer, const float* input, fVector4& color, float& depth) const {
 		const PSIN* psin = (const PSIN*)(input);
 
 		const PSConstantBuffer* param = (const PSConstantBuffer*)constantBuffer->getBuffer(0);
 
-		color = Vector4(param->solidColor, 1.f);
+		color = fVector4(param->solidColor, 1.f);
 		depth = psin->pos.z;
 	}
 
 private:
-	Vector3 m_color;
+	fVector3 m_color;
 
 public:
-	PixelShaderSolid(Vector3 color) : m_color(color) { }
+	PixelShaderSolid(fVector3 color) : m_color(color) { }
 	~PixelShaderSolid() {}
 };

@@ -40,7 +40,7 @@ private:
 class VertexShader
 {
 public:
-	virtual void preRender(const Matrix4& worldTransform, RenderablePtr renderable) const = 0;
+	virtual void preRender(const fMatrix4& worldTransform, RenderablePtr renderable) const = 0;
 	virtual void vsFunction(ConstConstantBufferPtr constantBuffer, const float* input, const VertexDesc::OffsetData& inputVertexOffset, float* output, float& invZ) const = 0;
 	virtual const VertexDesc& getOutputVertexDesc(void) const = 0;
 

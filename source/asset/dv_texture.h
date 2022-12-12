@@ -10,7 +10,7 @@ namespace davinci
 class Texture : noncopyable
 {
 public:
-	Vector3 getRGB(const Vector2& uv) const;
+	fVector3 getRGB(const fVector2& uv) const;
 
 	//Pixel size(counts of loat)
 	int32_t	getPixelSize(void) const {
@@ -32,7 +32,7 @@ public:
 
 	friend TexturePtr AssetUtility::loadTextureFromPNG(RenderDevice* device, const char* filename);
 	friend TexturePtr AssetUtility::createStandardTexture(RenderDevice* device, int32_t width, int32_t height, int32_t gridSize,
-		const Vector3& ltColor, const Vector3& rtColor, const Vector3& lbColor, const Vector3& rbColor);
+		const fVector3& ltColor, const fVector3& rtColor, const fVector3& lbColor, const fVector3& rbColor);
 };
 
 }

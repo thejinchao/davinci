@@ -9,11 +9,11 @@ class SceneObject
 {
 public:
 	void addChild(SceneObjectPtr child);
-	void setTransform(const Matrix4& transform);
-	virtual void render(const Matrix4& transParent, RenderQueue& queue);
+	void setTransform(const fMatrix4& transform);
+	virtual void render(const fMatrix4& transParent, RenderQueue& queue);
 
 protected:
-	Matrix4 m_transform;
+	fMatrix4 m_transform;
 	SceneObjectVector m_childen;
 
 public:

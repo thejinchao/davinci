@@ -20,7 +20,7 @@ public:
 	struct Node
 	{
 		std::string			m_name;
-		Matrix4				m_transform;
+		fMatrix4			m_transform;
 		std::vector<Node>	m_childen;
 		std::vector<size_t>	m_parts;	//index of m_meshes
 	};
@@ -29,11 +29,11 @@ public:
 	MeshPart* _hackGetMeshPart(void) {
 		return &(m_meshes[0]);
 	}
-	typedef std::function<void(const Matrix4& transform, const MeshPart* meshPart)> VisotorFunction;
-	void visit(const Matrix4& transform, VisotorFunction func) const;
+	typedef std::function<void(const fMatrix4& transform, const MeshPart* meshPart)> VisotorFunction;
+	void visit(const fMatrix4& transform, VisotorFunction func) const;
 
 private:
-	void _visitNode(const Matrix4& transform, const Node& node, VisotorFunction vistorFunc) const;
+	void _visitNode(const fMatrix4& transform, const Node& node, VisotorFunction vistorFunc) const;
 
 private:
 	std::string				m_name;

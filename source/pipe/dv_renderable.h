@@ -15,7 +15,7 @@ public:
 		return m_primitiveType;
 	}
 	
-	const Matrix4& getWorldTransform(void) const {
+	const fMatrix4& getWorldTransform(void) const {
 		return m_worldTransform;
 	}
 	
@@ -39,7 +39,7 @@ public:
 
 protected:
 	PrimitiveType m_primitiveType;
-	Matrix4 m_worldTransform;
+	fMatrix4 m_worldTransform;
 	ConstVertexShaderPtr m_vs;
 	ConstPixelShaderPtr m_ps;
 	ConstantBufferPtr m_vsConstantBuffer;

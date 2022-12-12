@@ -6,7 +6,7 @@ namespace davinci
 
 //-------------------------------------------------------------------------------------
 SceneObject::SceneObject()
-	: m_transform(Matrix4::IDENTITY)
+	: m_transform(fMatrix4::IDENTITY)
 {
 
 }
@@ -24,15 +24,15 @@ void SceneObject::addChild(SceneObjectPtr child)
 }
 
 //-------------------------------------------------------------------------------------
-void SceneObject::setTransform(const Matrix4& transform)
+void SceneObject::setTransform(const fMatrix4& transform)
 {
 	m_transform = transform;
 }
 
 //-------------------------------------------------------------------------------------
-void SceneObject::render(const Matrix4& transParent, RenderQueue& queue)
+void SceneObject::render(const fMatrix4& transParent, RenderQueue& queue)
 {
-	Matrix4 transform = m_transform * transParent;
+	fMatrix4 transform = m_transform * transParent;
 	for (auto child : m_childen) {
 		child->render(transform, queue);
 	}

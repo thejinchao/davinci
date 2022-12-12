@@ -10,7 +10,7 @@ using namespace davinci;
 TEST(Math_Vector4, Basic)
 {
 	{
-		Vector4 v1;
+		fVector4 v1;
 		EXPECT_EQ(v1.x, 0.f);
 		EXPECT_EQ(v1.y, 0.f);
 		EXPECT_EQ(v1.z, 0.f);
@@ -18,7 +18,7 @@ TEST(Math_Vector4, Basic)
 	}
 	{
 		float a = _randomFloat(), b = _randomFloat(), c = _randomFloat(), d = _randomFloat();
-		Vector4 v1(a, b, c, d), v2(v1);
+		fVector4 v1(a, b, c, d), v2(v1);
 		EXPECT_EQ(v1.x, a);
 		EXPECT_EQ(v1.y, b);
 		EXPECT_EQ(v1.z, c);
@@ -31,7 +31,7 @@ TEST(Math_Vector4, Basic)
 	}
 	{
 		float a = _randomFloat(), b = _randomFloat(), c = _randomFloat(), d = _randomFloat();
-		Vector4 v1;
+		fVector4 v1;
 		v1[0] = a; v1[1] = b; v1[2] = c; v1[3] = d;
 
 		EXPECT_EQ(v1.x, a);
@@ -46,7 +46,7 @@ TEST(Math_Vector4, Basic)
 	}
 	{
 		float a = _randomFloat();
-		Vector4 v2(a);
+		fVector4 v2(a);
 		EXPECT_EQ(v2.x, a);
 		EXPECT_EQ(v2.y, a);
 		EXPECT_EQ(v2.z, a);
@@ -54,7 +54,7 @@ TEST(Math_Vector4, Basic)
 	}
 	{
 		float a[4] = { FOUR_RANDOM_FLOAT };
-		Vector4 v2(a);
+		fVector4 v2(a);
 		EXPECT_EQ(v2.x, a[0]);
 		EXPECT_EQ(v2.y, a[1]);
 		EXPECT_EQ(v2.z, a[2]);
@@ -62,7 +62,7 @@ TEST(Math_Vector4, Basic)
 	}
 	{
 		int a[4] = { rand() - RAND_MAX / 2, rand() - RAND_MAX / 2,  rand() - RAND_MAX / 2, rand() - RAND_MAX / 2 };
-		Vector4 v2(a);
+		fVector4 v2(a);
 		EXPECT_EQ(v2.x, (float)a[0]);
 		EXPECT_EQ(v2.y, (float)a[1]);
 		EXPECT_EQ(v2.z, (float)a[2]);
@@ -71,7 +71,7 @@ TEST(Math_Vector4, Basic)
 
 	//operator 
 	{
-		Vector4 v1(FOUR_RANDOM_FLOAT), v2;
+		fVector4 v1(FOUR_RANDOM_FLOAT), v2;
 		v2 = v1;
 		EXPECT_EQ(v1.x, v2.x);
 		EXPECT_EQ(v1.y, v2.y);
@@ -80,7 +80,7 @@ TEST(Math_Vector4, Basic)
 	}
 	{
 		float a = _randomFloat();
-		Vector4 v1;
+		fVector4 v1;
 		v1 = a;
 		EXPECT_EQ(v1.x, a);
 		EXPECT_EQ(v1.y, a);
@@ -88,7 +88,7 @@ TEST(Math_Vector4, Basic)
 		EXPECT_EQ(v1.w, a);
 	}
 	{
-		Vector4 v1(FOUR_RANDOM_FLOAT), v2(v1);
+		fVector4 v1(FOUR_RANDOM_FLOAT), v2(v1);
 		EXPECT_TRUE(v1 == v2);
 		v2.x += 1.f;
 		EXPECT_TRUE(v1 != v2);
@@ -97,13 +97,13 @@ TEST(Math_Vector4, Basic)
 		float a = 0.f;
 		while (a == 0.f) { a = _randomFloat(); }
 
-		Vector4 v1(FOUR_RANDOM_FLOAT);
+		fVector4 v1(FOUR_RANDOM_FLOAT);
 
-		Vector4 v2;
+		fVector4 v2;
 		while (v2.x == 0.f || v2.y == 0.f || v2.z == 0.f || v2.w == 0.f) {
-			v2 = Vector4(FOUR_RANDOM_FLOAT);
+			v2 = fVector4(FOUR_RANDOM_FLOAT);
 		}
-		Vector4 v3;
+		fVector4 v3;
 
 		v3 = v1 + v2;
 		EXPECT_EQ(v3.x, v1.x + v2.x);
@@ -137,7 +137,7 @@ TEST(Math_Vector4, Basic)
 		EXPECT_EQ(v3.w, v1.w / v2.w);
 	}
 	{
-		Vector4 v1(FOUR_RANDOM_FLOAT), v2;
+		fVector4 v1(FOUR_RANDOM_FLOAT), v2;
 		v2 = +v1;
 		EXPECT_TRUE(v1 == v2);
 
@@ -150,9 +150,9 @@ TEST(Math_Vector4, Basic)
 
 	{
 		float a = _randomFloat();
-		Vector4 v1, v2;
+		fVector4 v1, v2;
 		while (v1.x == 0.f || v1.y == 0.f || v1.z == 0.f || v1.w == 0.f) {
-			v1 = Vector4(FOUR_RANDOM_FLOAT);
+			v1 = fVector4(FOUR_RANDOM_FLOAT);
 		}
 
 		v2 = a * v1;
@@ -193,9 +193,9 @@ TEST(Math_Vector4, Basic)
 	}
 
 	{
-		Vector4 v1(FOUR_RANDOM_FLOAT), v2, v3;
+		fVector4 v1(FOUR_RANDOM_FLOAT), v2, v3;
 		while (v2.x == 0.f || v2.y == 0.f || v2.z == 0.f || v2.w == 0.f) {
-			v2 = Vector4(FOUR_RANDOM_FLOAT);
+			v2 = fVector4(FOUR_RANDOM_FLOAT);
 		}
 
 		float a = _randomFloat();
@@ -235,7 +235,7 @@ TEST(Math_Vector4, Basic)
 	}
 
 	{
-		Vector4 v1(FOUR_RANDOM_FLOAT), v2(v1);
+		fVector4 v1(FOUR_RANDOM_FLOAT), v2(v1);
 
 		v2 += 1.f;
 		EXPECT_TRUE(v2 > v1);
@@ -252,7 +252,7 @@ TEST(Math_Vector4, Algorithm)
 
 	//dotProduct
 	{
-		Vector4 v1(FOUR_RANDOM_FLOAT), v2(FOUR_RANDOM_FLOAT);
+		fVector4 v1(FOUR_RANDOM_FLOAT), v2(FOUR_RANDOM_FLOAT);
 		glm::vec4 gv1(v1.x, v1.y, v1.z, v1.w), gv2(v2.x, v2.y, v2.z, v2.w);
 
 		EXPECT_EQ(v1.dotProduct(v2), glm::dot(gv1, gv2));

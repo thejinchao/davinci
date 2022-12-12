@@ -14,7 +14,7 @@ class PrimitiveAfterAssember
 public:
 	struct Node
 	{
-		Matrix4					transform;
+		fMatrix4					transform;
 		DeviceBufferPtr			vertexData;
 		size_t					vertexSize;
 		size_t					vertexCounts;

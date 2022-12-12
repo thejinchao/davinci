@@ -1,7 +1,7 @@
 #include "dvr_triangle.h"
 
 //-------------------------------------------------------------------------------------
-void Triangle::build(const Vector3& _pixelColor, int32_t canvasWidth, int32_t canvasHeight, bool debug) 
+void Triangle::build(const fVector3& _pixelColor, int32_t canvasWidth, int32_t canvasHeight, bool debug) 
 {
 	pixelColor = _pixelColor;
 	pixels.clear();
@@ -15,7 +15,7 @@ void Triangle::build(const Vector3& _pixelColor, int32_t canvasWidth, int32_t ca
 	//build pixel data
 	Rasterizer::drawTriangleLarrabee(canvasWidth, canvasHeight,
 		p0, (ccw ? p2 : p1), (ccw ? p1 : p2),
-		[this](std::pair<int32_t, int32_t> pos, const Vector3& t) {
+		[this](std::pair<int32_t, int32_t> pos, const fVector3& t) {
 		pixels.push_back(pos);
 	});
 }

@@ -7,11 +7,11 @@ class PixelShaderTexture : public PixelShader
 public:
 	struct PSConstantBuffer
 	{
-		Vector3 meshColor;
+		fVector3 meshColor;
 	};
 
 public:
-	void setMeshColor(const Vector3& meshColor) {
+	void setMeshColor(const fVector3& meshColor) {
 		m_color = meshColor;
 	}
 
@@ -22,20 +22,20 @@ public:
 		renderable->setPSConstantBuffer(0, (const uint8_t*)&param, sizeof(PSConstantBuffer));
 	}
 
-	virtual void psFunction(ConstConstantBufferPtr constantBuffer, const float* input, Vector4& color, float& depth) const {
+	virtual void psFunction(ConstConstantBufferPtr constantBuffer, const float* input, fVector4& color, float& depth) const {
 		const PSIN* psin = (const PSIN*)(input);
 		const PSConstantBuffer* param = (const PSConstantBuffer*)constantBuffer->getBuffer(0);
-		const Vector3 meshColor = param->meshColor;
+		const fVector3 meshColor = param->meshColor;
 
-		color = Vector4(m_texture->getRGB(psin->uv0)*meshColor, 1.f);
+		color = fVector4(m_texture->getRGB(psin->uv0)*meshColor, 1.f);
 		depth = psin->pos.z;
 	}
 
 private:
 	TexturePtr m_texture;
-	Vector3 m_color;
+	fVector3 m_color;
 
 public:
-	PixelShaderTexture(TexturePtr texture) : m_texture(texture), m_color(Vector3::WHITE) { }
+	PixelShaderTexture(TexturePtr texture) : m_texture(texture), m_color(fVector3::WHITE) { }
 	~PixelShaderTexture() {}
 };

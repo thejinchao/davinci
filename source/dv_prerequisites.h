@@ -7,12 +7,6 @@
 // so decreases dependencies between files
 namespace davinci
 {
-
-class Vector2;
-class Vector3;
-class Vector4;
-class Matrix3;
-class Matrix4;
 class RenderQueue;
 class Renderable;
 class VertexShader;
@@ -60,7 +54,7 @@ typedef std::vector<DeviceBufferPtr>			DeviceBufferVector;
 namespace davinci
 {
 
-class noncopyable
+	class noncopyable
 {
 protected:
 	noncopyable() {}

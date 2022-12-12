@@ -13,7 +13,7 @@ namespace davinci
 #define ifloat3_element(a) { a[0], a[1], a[2] }
 
 //-------------------------------------------------------------------------------------
-inline float _edge(const Vector3& a, const Vector3& b, const Vector3& p)
+inline float _edge(const fVector3& a, const fVector3& b, const fVector3& p)
 {
 	return (p.x - a.x) * (b.y - a.y) - (p.y - a.y) * (b.x - a.x);
 }
@@ -24,7 +24,7 @@ struct DrawTriangleParam
 	int32_t		widthInPixel;
 	int32_t		heightInPixel;
 	int32_t		widthInTiles;
-	Vector3		verts[3];
+	fVector3		verts[3];
 	float		bbox_min_x;
 	float		bbox_max_x;
 	float		bbox_min_y;
@@ -46,7 +46,7 @@ void _drawTriangle_Fine(int32_t tile_id, int32_t coarse_id, int32_t fine_id,
 {
 	ifloat3_t pixelEdges = ifloat3_element(edges0);
 
-	const Vector3 v0(param.verts[0]), v1(param.verts[1]), v2(param.verts[2]);
+	const fVector3 v0(param.verts[0]), v1(param.verts[1]), v2(param.verts[2]);
 
 	int32_t fine_start_x = (tile_id%param.widthInTiles) * TILE_WIDTH_IN_PIXELS + (coarse_id % 4)*COARSE_BLOCK_WIDTH_IN_PIXELS + (fine_id % 4)*FINE_BLOCK_WIDTH_IN_PIXELS;
 	int32_t fine_start_y = (tile_id / param.widthInTiles) * TILE_WIDTH_IN_PIXELS + (coarse_id / 4) * COARSE_BLOCK_WIDTH_IN_PIXELS + (fine_id / 4)*FINE_BLOCK_WIDTH_IN_PIXELS;
@@ -71,15 +71,15 @@ void _drawTriangle_Fine(int32_t tile_id, int32_t coarse_id, int32_t fine_id,
 			
 			if (!rejected) {
 
-				Vector3 pixel(x + 0.5f, y + 0.5f, 0.f);
+				fVector3 pixel(x + 0.5f, y + 0.5f, 0.f);
 				float w0 = _edge(v1, v2, pixel);
 				float w1 = _edge(v2, v0, pixel);
 				float w2 = _edge(v0, v1, pixel);
 
-				Vector3 t = Vector3(w0 / param.area, w1 / param.area, w2 / param.area);
+				fVector3 t = fVector3(w0 / param.area, w1 / param.area, w2 / param.area);
 
 				float invZ = MathUtil::lerp3(v0.z, v1.z, v2.z, t);
-				t *= Vector3(v0.z / invZ, v1.z / invZ, v2.z / invZ);
+				t *= fVector3(v0.z / invZ, v1.z / invZ, v2.z / invZ);
 				callback(std::make_pair(x, y), t);
 			}
 			ifloat3_add(edgesRow, param.edgesDY);
@@ -283,7 +283,7 @@ void _drawTriangle_Title(int32_t tile_id,
 }
 
 //-------------------------------------------------------------------------------------
-void Rasterizer::drawTriangleLarrabee(int32_t canvasWidth, int32_t canvasHeight, const Vector3& v0, const Vector3& v1, const Vector3& v2, DrawTriangleCallback callback, const DebugParam* debug)
+void Rasterizer::drawTriangleLarrabee(int32_t canvasWidth, int32_t canvasHeight, const fVector3& v0, const fVector3& v1, const fVector3& v2, DrawTriangleCallback callback, const DebugParam* debug)
 {
 	assert(canvasWidth >= TILE_WIDTH_IN_PIXELS && canvasHeight >= TILE_WIDTH_IN_PIXELS);
 	assert(canvasWidth%TILE_WIDTH_IN_PIXELS == 0 && canvasHeight%canvasHeight == 0);
@@ -300,11 +300,11 @@ void Rasterizer::drawTriangleLarrabee(int32_t canvasWidth, int32_t canvasHeight,
 	param.widthInTiles = canvasWidth / TILE_WIDTH_IN_PIXELS;
 
 	//back cull
-	Vector3 vnormal = (v2 - v1).crossProduct(v0 - v2);
+	fVector3 vnormal = (v2 - v1).crossProduct(v0 - v2);
 	if (vnormal.z > 0) return;
 
 	//to screen space(integer)
-	const Vector3 verts[3] = { v0, v1, v2 };
+	const fVector3 verts[3] = { v0, v1, v2 };
 	param.verts[0] = verts[0];
 	param.verts[1] = verts[1];
 	param.verts[2] = verts[2];
@@ -447,15 +447,15 @@ void Rasterizer::drawTriangleLarrabee(int32_t canvasWidth, int32_t canvasHeight,
 }
 
 //-------------------------------------------------------------------------------------
-void Rasterizer::drawTriangleScanline(int32_t canvasWidth, int32_t canvasHeight, const Vector3& v0, const Vector3& v1, const Vector3& v2, DrawTriangleCallback callback)
+void Rasterizer::drawTriangleScanline(int32_t canvasWidth, int32_t canvasHeight, const fVector3& v0, const fVector3& v1, const fVector3& v2, DrawTriangleCallback callback)
 {
 	//back cull
-	Vector3 edge0 = v2 - v1;
-	Vector3 edge1 = v0 - v2;
-	Vector3 vnormal = edge0.crossProduct(edge1);
+	fVector3 edge0 = v2 - v1;
+	fVector3 edge1 = v0 - v2;
+	fVector3 vnormal = edge0.crossProduct(edge1);
 	if (vnormal.z > 0) return;
 
-	Vector3 edge2 = v1 - v0;
+	fVector3 edge2 = v1 - v0;
 
 	float xmin = MathUtil::min3(v0.x, v1.x, v2.x);
 	float ymin = MathUtil::min3(v0.y, v1.y, v2.y);
@@ -472,7 +472,7 @@ void Rasterizer::drawTriangleScanline(int32_t canvasWidth, int32_t canvasHeight,
 	for (int32_t y = y0; y <= y1; y++) {
 		for (int32_t x = x0; x <= x1; x++) {
 
-			Vector3 pixel(x + 0.5f, y + 0.5f, 0.f);
+			fVector3 pixel(x + 0.5f, y + 0.5f, 0.f);
 
 			bool overlaps = true;
 
@@ -489,10 +489,10 @@ void Rasterizer::drawTriangleScanline(int32_t canvasWidth, int32_t canvasHeight,
 			if (!overlaps) continue;
 
 
-			Vector3 t = Vector3(w0 / area, w1 / area, w2 / area);
+			fVector3 t = fVector3(w0 / area, w1 / area, w2 / area);
 
 			float invZ = MathUtil::lerp3(v0.z, v1.z, v2.z, t);
-			t *= Vector3(v0.z / invZ, v1.z / invZ, v2.z / invZ);
+			t *= fVector3(v0.z / invZ, v1.z / invZ, v2.z / invZ);
 
 			callback(std::make_pair(x, y), t);
 		}

@@ -5,8 +5,8 @@
 
 struct VSOUT
 {
-	Vector3 pos;
-	Vector2 uv0;
+	fVector3 pos;
+	fVector2 uv0;
 };
 
 typedef VertexShaderStandard<false, true>	VSStandard;
@@ -30,7 +30,7 @@ bool Sample02::init(void)
 
 	//build a scene
 	Entity* entity_cube = new Entity();
-	entity_cube->build(Matrix4::IDENTITY,
+	entity_cube->build(fMatrix4::IDENTITY,
 		AssetUtility::createStandardModel_Box(&m_device, 1.f, 1.f, 1.f, PrimitiveType::PT_TRIANGLE_LIST, true, true, true),
 		m_vs, m_ps);
 
@@ -47,16 +47,16 @@ void Sample02::render(int32_t width, int32_t height)
 	//set mesh color
 	m_updateT += MathUtil::PI * 0.0125f;
 
-	Vector3 meshColor;
+	fVector3 meshColor;
 	meshColor.x = (sinf(m_updateT * 1.0f) + 1.0f) * 0.5f;
 	meshColor.y = (cosf(m_updateT * 3.0f) + 1.0f) * 0.5f;
 	meshColor.z = (sinf(m_updateT * 5.0f) + 1.0f) * 0.5f;
 	((PSWithTexture*)m_ps.get())->setMeshColor(meshColor);
 
 	//set camera
-	m_camera.setEye(Vector3(4.f, 3.f, -6.f), false);
-	m_camera.setLookat(Vector3(0.f, 1.f, 0.f), false);
-	m_camera.setUp(Vector3::UNIT_Y, false);
+	m_camera.setEye(fVector3(4.f, 3.f, -6.f), false);
+	m_camera.setLookat(fVector3(0.f, 1.f, 0.f), false);
+	m_camera.setUp(fVector3::UNIT_Y, false);
 	m_camera.setFov(MathUtil::PI_DIV4, false);
 	m_camera.setClipRange(0.01f, 100.0f, false);
 	m_camera.setAspect(width / (float)height);

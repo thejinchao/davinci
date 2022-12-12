@@ -6,45 +6,46 @@
 namespace davinci
 {
 
-class Vector4
+template<typename T>
+class TVector4
 {
 public:
-	float x, y, z, w;
+	T x, y, z, w;
 
 public:
 	// Construct
-	Vector4() : x(0.f), y(0.f), z(0.f), w(0.f) { }
-	Vector4(float _x, float _y, float _z, float _w) : x(_x), y(_y), z(_z), w(_w){ }
-	Vector4(const Vector3& _xyz, float _w) : x(_xyz.x), y(_xyz.y), z(_xyz.z), w(_w) { }
-	inline explicit Vector4(const float s) : x(s), y(s), z(s), w(s) { }
-	inline explicit Vector4(const float f[4]) : x(f[0]), y(f[1]), z(f[2]), w(f[3]) { }
-	inline explicit Vector4(float* const f) : x(f[0]), y(f[1]), z(f[2]), w(f[3]) { }
-	inline explicit Vector4(const int f[4]) : x((float)f[0]), y((float)f[1]), z((float)f[2]), w((float)f[3]) { }
+	TVector4() : x(0.f), y(0.f), z(0.f), w(0.f) { }
+	TVector4(T _x, T _y, T _z, T _w) : x(_x), y(_y), z(_z), w(_w){ }
+	TVector4(const TVector3<T>& _xyz, T _w) : x(_xyz.x), y(_xyz.y), z(_xyz.z), w(_w) { }
+	inline explicit TVector4(const T s) : x(s), y(s), z(s), w(s) { }
+	inline explicit TVector4(const T f[4]) : x(f[0]), y(f[1]), z(f[2]), w(f[3]) { }
+	inline explicit TVector4(T* const f) : x(f[0]), y(f[1]), z(f[2]), w(f[3]) { }
+	inline explicit TVector4(const int f[4]) : x((T)f[0]), y((T)f[1]), z((T)f[2]), w((T)f[3]) { }
 
 public:
-	inline float operator [] (const size_t i) const {
+	inline T operator [] (const size_t i) const {
 		assert(i < 4);
 		return *(&x + i);
 	}
 
-	inline float& operator [] (const size_t i) {
+	inline T& operator [] (const size_t i) {
 		assert(i < 4);
 		return *(&x + i);
 	}
 
-	inline float* ptr(void) {
+	inline T* ptr(void) {
 		return &x;
 	}
 
-	inline const float* ptr(void) const {
+	inline const T* ptr(void) const {
 		return &x;
 	}
 
-	inline Vector3 xyz(void) const { return Vector3(x, y, z); }
+	inline TVector3<T> xyz(void) const { return TVector3<T>(x, y, z); }
 
 public:
 	// Operations
-	inline Vector4& operator = (const Vector4& rkVector) {
+	inline TVector4& operator = (const TVector4& rkVector) {
 		x = rkVector.x;
 		y = rkVector.y;
 		z = rkVector.z;
@@ -52,7 +53,7 @@ public:
 		return *this;
 	}
 
-	inline Vector4& operator = (const float fScalar) {
+	inline TVector4& operator = (const T fScalar) {
 		x = fScalar;
 		y = fScalar;
 		z = fScalar;
@@ -60,78 +61,78 @@ public:
 		return *this;
 	}
 
-	inline bool operator == (const Vector4& rkVector) const {
+	inline bool operator == (const TVector4& rkVector) const {
 		return (x == rkVector.x && y == rkVector.y && z == rkVector.z && w == rkVector.w);
 	}
 
-	inline bool operator != (const Vector4& rkVector) const {
+	inline bool operator != (const TVector4& rkVector) const {
 		return (x != rkVector.x || y != rkVector.y || z != rkVector.z || w != rkVector.w);
 	}
 
 public:
 	// Arithmetic operations
-	inline Vector4 operator + (const Vector4& rkVector) const {
-		return Vector4( x + rkVector.x, y + rkVector.y, z + rkVector.z, w + rkVector.w);
+	inline TVector4 operator + (const TVector4& rkVector) const {
+		return TVector4( x + rkVector.x, y + rkVector.y, z + rkVector.z, w + rkVector.w);
 	}
 
-	inline Vector4 operator - (const Vector4& rkVector) const {
-		return Vector4( x - rkVector.x, y - rkVector.y, z - rkVector.z, w - rkVector.w);
+	inline TVector4 operator - (const TVector4& rkVector) const {
+		return TVector4( x - rkVector.x, y - rkVector.y, z - rkVector.z, w - rkVector.w);
 	}
 
-	inline Vector4 operator * (const float fScalar) const {
-		return Vector4( x * fScalar, y * fScalar, z * fScalar, w * fScalar);
+	inline TVector4 operator * (const T fScalar) const {
+		return TVector4( x * fScalar, y * fScalar, z * fScalar, w * fScalar);
 	}
 
-	inline Vector4 operator * (const Vector4& rhs) const {
-		return Vector4(x * rhs.x, y * rhs.y, z * rhs.z, w * rhs.w);
+	inline TVector4 operator * (const TVector4& rhs) const {
+		return TVector4(x * rhs.x, y * rhs.y, z * rhs.z, w * rhs.w);
 	}
 
-	inline Vector4 operator / (const float fScalar) const {
+	inline TVector4 operator / (const T fScalar) const {
 		assert(fScalar != 0.0);
-		return Vector4(x / fScalar, y / fScalar, z / fScalar, w / fScalar);
+		return TVector4(x / fScalar, y / fScalar, z / fScalar, w / fScalar);
 	}
 
-	inline Vector4 operator / (const Vector4& rhs) const {
-		return Vector4( x / rhs.x, y / rhs.y, z / rhs.z, w / rhs.w);
+	inline TVector4 operator / (const TVector4& rhs) const {
+		return TVector4( x / rhs.x, y / rhs.y, z / rhs.z, w / rhs.w);
 	}
 
-	inline const Vector4& operator + () const {
+	inline const TVector4& operator + () const {
 		return *this;
 	}
 
-	inline Vector4 operator - () const {
-		return Vector4(-x, -y, -z, -w);
+	inline TVector4 operator - () const {
+		return TVector4(-x, -y, -z, -w);
 	}
 
 public:
-	// overloaded operators to help Vector4
-	inline friend Vector4 operator * (const float fScalar, const Vector4& rkVector) {
-		return Vector4(fScalar * rkVector.x, fScalar * rkVector.y, fScalar * rkVector.z, fScalar * rkVector.w);
+	// overloaded operators to help TVector4
+	inline friend TVector4 operator * (const T fScalar, const TVector4& rkVector) {
+		return TVector4(fScalar * rkVector.x, fScalar * rkVector.y, fScalar * rkVector.z, fScalar * rkVector.w);
 	}
 
-	inline friend Vector4 operator / (const float fScalar, const Vector4& rkVector) {
-		return Vector4( fScalar / rkVector.x, fScalar / rkVector.y, fScalar / rkVector.z, fScalar / rkVector.w);
+	inline friend TVector4 operator / (const T fScalar, const TVector4& rkVector) {
+		return TVector4( fScalar / rkVector.x, fScalar / rkVector.y, fScalar / rkVector.z, fScalar / rkVector.w);
 	}
 
-	inline friend Vector4 operator + (const Vector4& lhs, const float rhs) {
-		return Vector4( lhs.x + rhs, lhs.y + rhs, lhs.z + rhs, lhs.w + rhs);
+	inline friend TVector4 operator + (const TVector4& lhs, const T rhs) {
+		return TVector4( lhs.x + rhs, lhs.y + rhs, lhs.z + rhs, lhs.w + rhs);
 	}
 
-	inline friend Vector4 operator + (const float lhs, const Vector4& rhs) {
-		return Vector4( lhs + rhs.x, lhs + rhs.y, lhs + rhs.z, lhs + rhs.w);
+	inline friend TVector4 operator + (const T lhs, const TVector4& rhs) {
+		return TVector4( lhs + rhs.x, lhs + rhs.y, lhs + rhs.z, lhs + rhs.w);
 	}
 
-	inline friend Vector4 operator - (const Vector4& lhs, const float rhs) {
-		return Vector4( lhs.x - rhs, lhs.y - rhs, lhs.z - rhs, lhs.w - rhs);
+	inline friend TVector4 operator - (const TVector4& lhs, const T rhs) {
+		return TVector4( lhs.x - rhs, lhs.y - rhs, lhs.z - rhs, lhs.w - rhs);
 	}
 
-	inline friend Vector4 operator - (const float lhs, const Vector4& rhs) {
-		return Vector4( lhs - rhs.x, lhs - rhs.y, lhs - rhs.z, lhs - rhs.z);
+	inline friend TVector4 operator - (const T lhs, const TVector4& rhs) {
+		return TVector4( lhs - rhs.x, lhs - rhs.y, lhs - rhs.z, lhs - rhs.z);
 	}
 
 public:
 	// arithmetic updates
-	inline Vector4& operator += (const Vector4& rkVector) {
+	inline TVector4& operator += (const TVector4& rkVector) {
 		x += rkVector.x;
 		y += rkVector.y;
 		z += rkVector.z;
@@ -139,7 +140,7 @@ public:
 		return *this;
 	}
 
-	inline Vector4& operator += (const float fScaler) {
+	inline TVector4& operator += (const T fScaler) {
 		x += fScaler;
 		y += fScaler;
 		z += fScaler;
@@ -147,7 +148,7 @@ public:
 		return *this;
 	}
 
-	inline Vector4& operator -= (const Vector4& rkVector) {
+	inline TVector4& operator -= (const TVector4& rkVector) {
 		x -= rkVector.x;
 		y -= rkVector.y;
 		z -= rkVector.z;
@@ -155,7 +156,7 @@ public:
 		return *this;
 	}
 
-	inline Vector4& operator -= (const float fScaler) {
+	inline TVector4& operator -= (const T fScaler) {
 		x -= fScaler;
 		y -= fScaler;
 		z -= fScaler;
@@ -163,7 +164,7 @@ public:
 		return *this;
 	}
 
-	inline Vector4& operator *= (const float fScalar) {
+	inline TVector4& operator *= (const T fScalar) {
 		x *= fScalar;
 		y *= fScalar;
 		z *= fScalar;
@@ -171,7 +172,7 @@ public:
 		return *this;
 	}
 
-	inline Vector4& operator *= (const Vector4& rkVector) {
+	inline TVector4& operator *= (const TVector4& rkVector) {
 		x *= rkVector.x;
 		y *= rkVector.y;
 		z *= rkVector.z;
@@ -179,7 +180,7 @@ public:
 		return *this;
 	}
 
-	inline Vector4& operator /= (const float fScalar) {
+	inline TVector4& operator /= (const T fScalar) {
 		assert(fScalar != 0.0);
 
 		x /= fScalar;
@@ -189,7 +190,7 @@ public:
 		return *this;
 	}
 
-	inline Vector4& operator /= (const Vector4& rkVector) {
+	inline TVector4& operator /= (const TVector4& rkVector) {
 		x /= rkVector.x;
 		y /= rkVector.y;
 		z /= rkVector.z;
@@ -197,21 +198,21 @@ public:
 		return *this;
 	}
 
-	inline bool operator < (const Vector4& rhs) const {
+	inline bool operator < (const TVector4& rhs) const {
 		return (x < rhs.x && y < rhs.y && z < rhs.z && w < rhs.w);
 	}
 
-	inline bool operator > (const Vector4& rhs) const {
+	inline bool operator > (const TVector4& rhs) const {
 		return (x > rhs.x && y > rhs.y && z > rhs.z && w > rhs.w);
 	}
 
 public:
 
-	inline float dotProduct(const Vector4& vec) const {
+	inline T dotProduct(const TVector4& vec) const {
 		return (x * vec.x + y * vec.y) + (z * vec.z + w * vec.w);
 	}
 
-	inline Vector4& saturate(void) {
+	inline TVector4& saturate(void) {
 		x = MathUtil::saturate(x);
 		y = MathUtil::saturate(y);
 		z = MathUtil::saturate(z);
@@ -221,14 +222,16 @@ public:
 	}
 public:
 	// special points
-	static const Vector4 ZERO;
-	static const Vector4 WHITE;
-	static const Vector4 BLACK;
-	static const Vector4 RED;
-	static const Vector4 GREEN;
-	static const Vector4 BLUE;
-	static const Vector4 PURPLE;
-	static const Vector4 GRAY;
+	static const TVector4 ZERO;
+	static const TVector4 WHITE;
+	static const TVector4 BLACK;
+	static const TVector4 RED;
+	static const TVector4 GREEN;
+	static const TVector4 BLUE;
+	static const TVector4 PURPLE;
+	static const TVector4 GRAY;
 };
+
+typedef TVector4<float> fVector4;
 
 }

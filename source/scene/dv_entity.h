@@ -15,7 +15,7 @@ namespace davinci
 class EntityRenderable : public Renderable
 {
 public:
-	void build(const RenderDevice* device, const Matrix4& transform, const Model::MeshPart* meshPart, VertexShaderPtr vs, PixelShaderPtr ps);
+	void build(const RenderDevice* device, const fMatrix4& transform, const Model::MeshPart* meshPart, VertexShaderPtr vs, PixelShaderPtr ps);
 
 	virtual ConstVertexBufferPtr getVertexBuffer(void) const;
 	virtual ConstIndexBufferPtr getIndexBuffer(void) const;
@@ -27,8 +27,8 @@ protected:
 class Entity : public SceneObject
 {
 public:
-	void build(const Matrix4& transform, ConstModelPtr model, VertexShaderPtr vs, PixelShaderPtr ps);
-	virtual void render(const Matrix4& transParent, RenderQueue& queue);
+	void build(const fMatrix4& transform, ConstModelPtr model, VertexShaderPtr vs, PixelShaderPtr ps);
+	virtual void render(const fMatrix4& transParent, RenderQueue& queue);
 
 private:
 	ConstModelPtr m_model;

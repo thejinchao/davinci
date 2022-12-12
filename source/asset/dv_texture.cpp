@@ -34,7 +34,7 @@ int32_t Texture::getPixelSize(PixelFormat pixelFormat)
 }
 
 //-------------------------------------------------------------------------------------
-Vector3 Texture::getRGB(const Vector2& uv) const
+fVector3 Texture::getRGB(const fVector2& uv) const
 {
 	float fx = uv.x - floorf(uv.x);
 	float fy = uv.y - floorf(uv.y);
@@ -43,7 +43,7 @@ Vector3 Texture::getRGB(const Vector2& uv) const
 	int32_t y = ((int32_t)(fy * m_height)) % m_height;
 	size_t pixelPos = (size_t)((y*m_width + x)*m_pixelSize);
 
-	return Vector3(&(m_pixelData[pixelPos]));
+	return fVector3(&(m_pixelData[pixelPos]));
 }
 
 }

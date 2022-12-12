@@ -17,8 +17,8 @@ public:
 
 	//create standard grid texture
 	static TexturePtr createStandardTexture(RenderDevice* device, int32_t width=256, int32_t height=256, int32_t gridSize=64,
-		const Vector3& ltColor = Vector3::RED, const Vector3& rtColor = Vector3::GREEN, 
-		const Vector3& lbColor = Vector3::BLUE, const Vector3& rbColor = Vector3::PURPLE);
+		const fVector3& ltColor = fVector3::RED, const fVector3& rtColor = fVector3::GREEN, 
+		const fVector3& lbColor = fVector3::BLUE, const fVector3& rbColor = fVector3::PURPLE);
 
 	//load texture from file
 	static TexturePtr loadTextureFromPNG(RenderDevice* device, const char* filename);

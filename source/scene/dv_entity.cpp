@@ -8,7 +8,7 @@ namespace davinci
 {
 
 //-------------------------------------------------------------------------------------
-void EntityRenderable::build(const RenderDevice* device, const Matrix4& transform, const Model::MeshPart* meshPart, VertexShaderPtr vs, PixelShaderPtr ps)
+void EntityRenderable::build(const RenderDevice* device, const fMatrix4& transform, const Model::MeshPart* meshPart, VertexShaderPtr vs, PixelShaderPtr ps)
 {
 	m_meshPart = meshPart;
 
@@ -33,7 +33,7 @@ ConstIndexBufferPtr EntityRenderable::getIndexBuffer(void) const
 }
 
 //-------------------------------------------------------------------------------------
-void Entity::build(const Matrix4& transform, ConstModelPtr model, VertexShaderPtr vs, PixelShaderPtr ps)
+void Entity::build(const fMatrix4& transform, ConstModelPtr model, VertexShaderPtr vs, PixelShaderPtr ps)
 {
 	m_transform = transform;
 	m_model = model;
@@ -42,12 +42,12 @@ void Entity::build(const Matrix4& transform, ConstModelPtr model, VertexShaderPt
 }
 
 //-------------------------------------------------------------------------------------
-void Entity::render(const Matrix4& transParent, RenderQueue& queue)
+void Entity::render(const fMatrix4& transParent, RenderQueue& queue)
 {
-	Matrix4 transform = m_transform * transParent;
+	fMatrix4 transform = m_transform * transParent;
 
 	//visit all submodel of this model
-	m_model->visit(transform, [&queue, this](const Matrix4& trans, const Model::MeshPart* meshPart) {
+	m_model->visit(transform, [&queue, this](const fMatrix4& trans, const Model::MeshPart* meshPart) {
 
 		RenderablePtr entityRenderable = std::shared_ptr<Renderable>(new EntityRenderable());
 		((EntityRenderable*)entityRenderable.get())->build(queue.getDevice(), trans, meshPart, m_vs, m_ps);

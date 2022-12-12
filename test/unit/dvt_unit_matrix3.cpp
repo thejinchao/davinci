@@ -12,8 +12,8 @@ TEST(Math_Matrix3, Basic)
 	{
 		float data[3][3] = { { THREE_RANDOM_FLOAT }, { THREE_RANDOM_FLOAT }, { THREE_RANDOM_FLOAT } };
 
-		Matrix3 m1(data), m2(m1);
-		Matrix3 m3(
+		fMatrix3 m1(data), m2(m1);
+		fMatrix3 m3(
 			data[0][0], data[0][1], data[0][2],
 			data[1][0], data[1][1], data[1][2],
 			data[2][0], data[2][1], data[2][2]
@@ -25,7 +25,7 @@ TEST(Math_Matrix3, Basic)
 	}
 
 	{
-		Matrix3 m1(NINE_RANDOM_FLOAT), m2;
+		fMatrix3 m1(NINE_RANDOM_FLOAT), m2;
 
 		m2 = m1;
 		EXPECT_EQ_3X3(m1, m2);
@@ -44,10 +44,10 @@ TEST(Math_Matrix3, Algorithm)
 		float data1[9] = { NINE_RANDOM_FLOAT };
 		float data2[9] = { NINE_RANDOM_FLOAT };
 
-		Matrix3 m1(NINE_ELEMENT_ROW(data1)), m2(NINE_ELEMENT_ROW(data2));
+		fMatrix3 m1(NINE_ELEMENT_ROW(data1)), m2(NINE_ELEMENT_ROW(data2));
 		glm::mat3 gm1(NINE_ELEMENT_COL(data1)), gm2(NINE_ELEMENT_COL(data2));
 
-		Matrix3 m3 = m1 + m2;
+		fMatrix3 m3 = m1 + m2;
 		glm::mat3 gm3 = gm1 + gm2;
 
 		EXPECT_EQ_3X3_T(m3, gm3);
@@ -58,10 +58,10 @@ TEST(Math_Matrix3, Algorithm)
 		float data1[9] = { NINE_RANDOM_FLOAT };
 		float data2[9] = { NINE_RANDOM_FLOAT };
 
-		Matrix3 m1(NINE_ELEMENT_ROW(data1)), m2(NINE_ELEMENT_ROW(data2));
+		fMatrix3 m1(NINE_ELEMENT_ROW(data1)), m2(NINE_ELEMENT_ROW(data2));
 		glm::mat3 gm1(NINE_ELEMENT_COL(data1)), gm2(NINE_ELEMENT_COL(data2));
 
-		Matrix3 m3 = m1 - m2;
+		fMatrix3 m3 = m1 - m2;
 		glm::mat3 gm3 = gm1 - gm2;
 
 		EXPECT_EQ_3X3_T(m3, gm3);
@@ -72,10 +72,10 @@ TEST(Math_Matrix3, Algorithm)
 		float data1[9] = { NINE_RANDOM_FLOAT };
 		float data2[9] = { NINE_RANDOM_FLOAT };
 
-		Matrix3 m1(NINE_ELEMENT_ROW(data1)), m2(NINE_ELEMENT_ROW(data2));
+		fMatrix3 m1(NINE_ELEMENT_ROW(data1)), m2(NINE_ELEMENT_ROW(data2));
 		glm::mat3 gm1(NINE_ELEMENT_COL(data1)), gm2(NINE_ELEMENT_COL(data2));
 
-		Matrix3 m3 = m1 * m2;
+		fMatrix3 m3 = m1 * m2;
 		glm::mat3 gm3 = gm1 * gm2;
 
 		EXPECT_EQ_3X3_T(m3, gm3);
@@ -85,10 +85,10 @@ TEST(Math_Matrix3, Algorithm)
 	{
 		float data1[9] = { NINE_RANDOM_FLOAT };
 
-		Matrix3 m1(NINE_ELEMENT_ROW(data1));
+		fMatrix3 m1(NINE_ELEMENT_ROW(data1));
 		glm::mat3 gm1(NINE_ELEMENT_COL(data1));
 
-		Matrix3 m2 = -m1;
+		fMatrix3 m2 = -m1;
 		glm::mat3 gm2 = -gm1;
 
 		EXPECT_EQ_3X3_T(m2, gm2);
@@ -100,9 +100,9 @@ TEST(Math_Matrix3, Algorithm)
 		float data1[9] = { NINE_RANDOM_FLOAT };
 		float data2[3] = { THREE_RANDOM_FLOAT };
 
-		Matrix3 m1(NINE_ELEMENT_ROW(data1));
-		Vector3 v1(data2);
-		Vector3 v2 = v1 * m1;
+		fMatrix3 m1(NINE_ELEMENT_ROW(data1));
+		fVector3 v1(data2);
+		fVector3 v2 = v1 * m1;
 
 		glm::mat3 gm1(NINE_ELEMENT_COL(data1));
 		glm::vec3 gv1(data2[0], data2[1], data2[2]);
@@ -118,9 +118,9 @@ TEST(Math_Matrix3, Algorithm)
 		float data1[9] = { NINE_RANDOM_FLOAT };
 		float data2[3] = { THREE_RANDOM_FLOAT };
 
-		Matrix3 m1(NINE_ELEMENT_ROW(data1));
-		Vector3 v1(data2);
-		Vector3 v2 = m1 * v1;
+		fMatrix3 m1(NINE_ELEMENT_ROW(data1));
+		fVector3 v1(data2);
+		fVector3 v2 = m1 * v1;
 
 		glm::mat3 gm1(NINE_ELEMENT_COL(data1));
 		glm::vec3 gv1(data2[0], data2[1], data2[2]);
@@ -136,8 +136,8 @@ TEST(Math_Matrix3, Algorithm)
 		float data1[9] = { NINE_RANDOM_FLOAT };
 		float a = _randomFloat();
 
-		Matrix3 m1(NINE_ELEMENT_ROW(data1));
-		Matrix3 m2 = m1 * a, m3 = a * m1;
+		fMatrix3 m1(NINE_ELEMENT_ROW(data1));
+		fMatrix3 m2 = m1 * a, m3 = a * m1;
 
 		glm::mat3 gm1(NINE_ELEMENT_COL(data1));
 		glm::mat3 gm2 = gm1 * a;
@@ -151,8 +151,8 @@ TEST(Math_Matrix3, Algorithm)
 	{
 		float data1[9] = { NINE_RANDOM_FLOAT };
 
-		Matrix3 m1(NINE_ELEMENT_ROW(data1));
-		Matrix3 m2 = m1.transpose();
+		fMatrix3 m1(NINE_ELEMENT_ROW(data1));
+		fMatrix3 m2 = m1.transpose();
 
 		glm::mat3 gm1(NINE_ELEMENT_COL(data1));
 		glm::mat3 gm2 = glm::transpose(gm1);
@@ -164,7 +164,7 @@ TEST(Math_Matrix3, Algorithm)
 	{
 		float data1[9] = { NINE_RANDOM_FLOAT };
 
-		Matrix3 m1(NINE_ELEMENT_ROW(data1)), m2;
+		fMatrix3 m1(NINE_ELEMENT_ROW(data1)), m2;
 		bool inv = m1.inverse(m2);
 
 		glm::mat3 gm1(NINE_ELEMENT_COL(data1));
@@ -173,7 +173,7 @@ TEST(Math_Matrix3, Algorithm)
 		if (inv) 
 			EXPECT_EQ_3X3_T(m2, gm2);
 
-		EXPECT_FALSE(Matrix3::ZERO.inverse(m2));
+		EXPECT_FALSE(fMatrix3::ZERO.inverse(m2));
 	}
 
 }

@@ -7,7 +7,7 @@ void SampleBase::dumpToGLTexture(uint32_t textureID)
 	const auto& colorBuffer = m_renderTarget.getColorBuffer();
 	uint8_t* data = new uint8_t[(size_t)(colorBuffer.getWidth()*colorBuffer.getHeight() * 3)];
 	for (size_t i = 0; i < (size_t)(colorBuffer.getWidth()*colorBuffer.getHeight()); i++) {
-		const Vector4* color = colorBuffer.ptr() + i;
+		const fVector4* color = colorBuffer.ptr() + i;
 		data[i * 3 + 0] = (uint8_t)(color->x * 255);
 		data[i * 3 + 1] = (uint8_t)(color->y * 255);
 		data[i * 3 + 2] = (uint8_t)(color->z * 255);

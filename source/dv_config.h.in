@@ -41,3 +41,6 @@
 	#define snprintf _snprintf 
 	typedef signed __int64 ssize_t;
 #endif
+
+typedef float  float32_t;
+typedef double float64_t;

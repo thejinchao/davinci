@@ -7,19 +7,19 @@ namespace davinci
 //-------------------------------------------------------------------------------------
 Model::Model()
 {
-	m_root.m_transform = Matrix4::IDENTITY;
+	m_root.m_transform = fMatrix4::IDENTITY;
 }
 
 //-------------------------------------------------------------------------------------
-void Model::visit(const Matrix4& transform, Model::VisotorFunction func) const
+void Model::visit(const fMatrix4& transform, Model::VisotorFunction func) const
 {
 	_visitNode(transform, m_root, func);
 }
 
 //-------------------------------------------------------------------------------------
-void Model::_visitNode(const Matrix4& parentTransform, const Node& node, Model::VisotorFunction vistorFunc) const
+void Model::_visitNode(const fMatrix4& parentTransform, const Node& node, Model::VisotorFunction vistorFunc) const
 {
-	Matrix4 transform = node.m_transform * parentTransform;
+	fMatrix4 transform = node.m_transform * parentTransform;
 	for (size_t index : node.m_parts) {
 		const MeshPart& parts = m_meshes[index];
 

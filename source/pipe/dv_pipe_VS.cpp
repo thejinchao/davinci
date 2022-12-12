@@ -22,7 +22,7 @@ void VertexShader::process(const RenderDevice* device, const PrimitiveAfterAssem
 		outputNode.psConstantBuffer = inputNode.psConstantBuffer;
 		outputNode.invZ.resize(inputNode.vertexCounts);
 
-		Matrix4 trans = inputNode.transform;
+		fMatrix4 trans = inputNode.transform;
 
 		//vs shader
 		for (size_t i = 0; i < inputNode.vertexCounts; i++) {

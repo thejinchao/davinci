@@ -62,7 +62,7 @@ inline int32_t _get_octants(int32_t dx, int32_t dy)
 }
 
 //-------------------------------------------------------------------------------------
-void Rasterizer::drawLine(int32_t canvasWidth, int32_t canvasHeight, const Vector2& start, const Vector2& end, DrawLineCallback callback)
+void Rasterizer::drawLine(int32_t canvasWidth, int32_t canvasHeight, const fVector2& start, const fVector2& end, DrawLineCallback callback)
 {
 	int32_t cx1 = (int32_t)floor(start.x + 0.5f);
 	int32_t cy1 = (int32_t)floor(start.y + 0.5f);
