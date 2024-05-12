@@ -15,6 +15,8 @@ VertexDesc::VertexDesc()
 //-------------------------------------------------------------------------------------
 void VertexDesc::addElement(VertexElementType type, VertexElementFormat format)
 {
+	m_elementOffset[(size_t)type] = (int32_t)m_currentOffset;
+
 	Element element;
 	element.type = type;
 	element.format = format;
@@ -24,8 +26,6 @@ void VertexDesc::addElement(VertexElementType type, VertexElementFormat format)
 	m_vertexSize += element.size;
 
 	m_elements.push_back(element);
-
-	m_elementOffset[(size_t)type] = (int32_t)element.offset;
 }
 
 //-------------------------------------------------------------------------------------
