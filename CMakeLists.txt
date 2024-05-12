@@ -52,27 +52,29 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/source/dv_config.h.in ${DV_AUTO_CONFI
 #Thirdparty libraries
 ########
 
+set(DV_THIRDPARTY_ROOT ${CMAKE_CURRENT_SOURCE_DIR}/thirdparty)
+
 # rapidjson
 find_package(RapidJSON CONFIG REQUIRED
-    PATHS $ENV{LIBRARIES_SDK_ROOT}/rapidjson/cmake)
+    PATHS ${DV_THIRDPARTY_ROOT}/rapidjson/cmake)
 
 #zlib
-set(ZLIB_ROOT $ENV{LIBRARIES_SDK_ROOT}/zlib)
+set(ZLIB_ROOT ${DV_THIRDPARTY_ROOT}/zlib)
 find_package(ZLIB REQUIRED)
 
 #libpng
-set(PNG_PNG_INCLUDE_DIR $ENV{LIBRARIES_SDK_ROOT}/libpng/include)
-list(APPEND CMAKE_LIBRARY_PATH $ENV{LIBRARIES_SDK_ROOT}/libpng/lib)
+set(PNG_PNG_INCLUDE_DIR ${DV_THIRDPARTY_ROOT}/libpng/include)
+list(APPEND CMAKE_LIBRARY_PATH ${DV_THIRDPARTY_ROOT}/libpng/lib)
 find_package(PNG REQUIRED)
 
 #GLFW
 find_package(glfw3 CONFIG REQUIRED
-	PATHS $ENV{LIBRARIES_SDK_ROOT}/glfw/lib/cmake/glfw3)
+	PATHS ${DV_THIRDPARTY_ROOT}/glfw/lib/cmake/glfw3)
 find_package(OpenGL REQUIRED)
 
 #glm
 find_package(glm CONFIG REQUIRED
-	PATHS $ENV{LIBRARIES_SDK_ROOT}/glm/include/cmake/glm)
+	PATHS ${DV_THIRDPARTY_ROOT}/glm/include/cmake/glm)
 
 ########
 #sub dictionary
